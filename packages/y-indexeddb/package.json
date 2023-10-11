@@ -1,6 +1,6 @@
 {
   "name": "@yomua/y-indexeddb",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Indexed DB",
   "main": "index.ts",
   "scripts": {
