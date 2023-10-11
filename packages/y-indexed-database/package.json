@@ -1,0 +1,12 @@
+{
+  "name": "y-indexed-database",
+  "version": "0.0.2",
+  "description": "Indexed DB",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "yomua",
+  "license": "ISC"
+}
