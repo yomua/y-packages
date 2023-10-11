@@ -1,6 +1,6 @@
 {
   "name": "y-indexed-database",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Indexed DB",
   "main": "index.ts",
   "scripts": {
