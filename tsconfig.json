@@ -8,14 +8,14 @@
     "sourceMap": true,
     "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"],
-      "yomua-hooks": ["./packages/yomua-hooks/src/index.ts"]
+      "@/*": ["packages/*"]
     },
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "declaration": false,
     "strictNullChecks": true,
-    "importHelpers": true
+    "importHelpers": true,
+    "strict": true
   },
   "exclude": [
     "node_modules",

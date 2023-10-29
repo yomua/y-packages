@@ -1,8 +1,8 @@
 {
   "name": "@yomua/yscrew",
   "version": "0.0.4",
-  "description": "",
-  "main": "src/index.ts",
+  "description": "提供额外的功能",
+  "main": "dist/yscrew.js",
   "directories": {
     "test": "test"
   },

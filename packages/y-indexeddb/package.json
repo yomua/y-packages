@@ -2,7 +2,7 @@
   "name": "@yomua/y-indexeddb",
   "version": "0.0.5",
   "description": "Indexed DB",
-  "main": "index.ts",
+  "main": "dist/y-indexeddb.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

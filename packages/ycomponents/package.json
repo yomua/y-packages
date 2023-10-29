@@ -1,0 +1,12 @@
+{
+  "name": "ycomponents",
+  "version": "0.0.1",
+  "description": "基于 React 的组件库",
+  "main": "dist/ycomponents.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
