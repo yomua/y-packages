@@ -1,8 +1,8 @@
 {
-  "name": "@yomua/yenchant",
+  "name": "y-components",
   "version": "0.0.1",
-  "description": "此包将附魔 JavaScript",
-  "main": "dist/yenchant.js",
+  "description": "基于 React 的组件库",
+  "main": "dist/y-components.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

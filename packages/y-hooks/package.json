@@ -1,9 +1,9 @@
 {
-  "name": "@yomua/yhooks",
+  "name": "@yomua/y-hooks",
   "version": "0.0.2",
   "description": "基于 React 的 hooks",
   "type": "module",
-  "main": "dist/yhooks.js",
+  "main": "dist/y-hooks.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

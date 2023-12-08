@@ -1,8 +1,8 @@
 {
-  "name": "ycomponents",
+  "name": "@yomua/y-enchant",
   "version": "0.0.1",
-  "description": "基于 React 的组件库",
-  "main": "dist/ycomponents.js",
+  "description": "此包将附魔 JavaScript",
+  "main": "dist/y-enchant.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
