@@ -6,6 +6,10 @@ export default function (
     go?: boolean // 修改 url 时是否直接跳转过去
   },
 ) {
+  if (!window?.history?.replaceState || !PopStateEvent) {
+    throw new Error('请在浏览器环境使用')
+  }
+
   const { go = false, state = null } = options ?? {}
 
   window.history.replaceState(null, '', url)

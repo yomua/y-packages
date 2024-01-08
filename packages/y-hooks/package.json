@@ -5,6 +5,7 @@
   "type": "module",
   "main": "./dist/cjs/index.js",
   "module": "./dist/es/index.js",
+  "github": "https://github.com/yomua/y-packages/tree/master/packages/y-hooks",
   "scripts": {
     "build": "rollup -c"
   },

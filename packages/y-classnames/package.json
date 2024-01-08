@@ -4,6 +4,7 @@
   "description": "处理 class",
   "main": "./dist/cjs/index.js",
   "module": "./dist/es/index.js",
+  "github": "https://github.com/yomua/y-packages/tree/master/packages/y-classnames",
   "scripts": {
     "build": "rollup -c"
   },

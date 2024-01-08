@@ -4,45 +4,45 @@
  * 此时如果没有做 [防止重复刷新] 操作，则 fn 将不会被防抖，因为此时相当于重新创建了一个作用域，生成了新的 setTimeout 和新的 fn,
  * 它们和之前的 setTimeout, fn 没有关联。
  */
-let preventRefreshItselfTimer: NodeJS.Timeout;
+let preventRefreshItselfTimer: NodeJS.Timeout
 
 export default <T = () => void>(
   fn: T,
   delay: number,
   option?: {
-    isRefreshItself?: boolean;
-  }
+    isRefreshItself?: boolean
+  },
 ) => {
-  const { isRefreshItself = false } = option ?? {};
+  const { isRefreshItself = false } = option ?? {}
 
-  let timer: NodeJS.Timeout;
+  let timer: NodeJS.Timeout
 
   function preventRefreshItself(...rest) {
     if (preventRefreshItselfTimer) {
-      clearTimeout(preventRefreshItselfTimer);
+      clearTimeout(preventRefreshItselfTimer)
     }
 
     preventRefreshItselfTimer = setTimeout(() => {
-      if (typeof fn === "function") {
+      if (typeof fn === 'function') {
         // 使用 fn 作为 this
-        fn.apply(fn, rest);
+        fn.apply(fn, rest)
       }
-    }, delay);
+    }, delay)
   }
 
   if (isRefreshItself) {
-    return preventRefreshItself;
+    return preventRefreshItself
   }
 
   return function (...rest) {
     if (timer) {
-      clearTimeout(timer);
+      clearTimeout(timer)
     }
 
     timer = setTimeout(() => {
-      if (typeof fn === "function") {
-        fn.apply(fn, rest);
+      if (typeof fn === 'function') {
+        fn.apply(fn, rest)
       }
-    }, delay);
-  };
-};
+    }, delay)
+  }
+}

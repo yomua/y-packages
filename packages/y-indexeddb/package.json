@@ -4,6 +4,7 @@
   "description": "Indexed DB",
   "main": "./dist/cjs/index.js",
   "module": "./dist/es/index.js",
+  "github": "https://github.com/yomua/y-packages/tree/master/packages/y-indexeddb",
   "scripts": {
     "build": "rollup -c"
   },
@@ -12,6 +13,7 @@
   "license": "ISC",
   "files": [
     "dist",
-    "package.json"
+    "package.json",
+    "README.md"
   ]
 }

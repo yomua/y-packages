@@ -1,17 +1,17 @@
 export default <T = () => void>(fn: T, delay: number) => {
-  let timer: number;
+  let timer: NodeJS.Timeout
 
   return function (...rest) {
     if (timer) {
-      return;
+      return
     }
 
     timer = setTimeout(() => {
-      if (typeof fn === "function") {
-        fn.apply(this, rest);
+      if (typeof fn === 'function') {
+        fn.apply(this, rest)
       }
 
-      timer = null as any;
-    }, delay);
-  };
-};
+      timer = null as any
+    }, delay)
+  }
+}
