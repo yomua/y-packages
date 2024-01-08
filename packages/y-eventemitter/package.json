@@ -1,7 +1,8 @@
 {
-  "name": "@yomua/y-indexeddb",
-  "version": "0.0.5",
-  "description": "Indexed DB",
+  "name": "@yomua/y-eventemitter",
+  "version": "0.0.1",
+  "description": "自定义事件",
+  "type": "module",
   "main": "./dist/cjs/index.js",
   "module": "./dist/es/index.js",
   "scripts": {
@@ -10,6 +11,7 @@
   "keywords": [],
   "author": "yomua",
   "license": "ISC",
+  "dependencies": {},
   "files": [
     "dist",
     "package.json"

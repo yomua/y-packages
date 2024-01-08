@@ -4,7 +4,7 @@
  * 此时如果没有做 [防止重复刷新] 操作，则 fn 将不会被防抖，因为此时相当于重新创建了一个作用域，生成了新的 setTimeout 和新的 fn,
  * 它们和之前的 setTimeout, fn 没有关联。
  */
-let preventRefreshItselfTimer: number;
+let preventRefreshItselfTimer: NodeJS.Timeout;
 
 export default <T = () => void>(
   fn: T,
@@ -15,18 +15,17 @@ export default <T = () => void>(
 ) => {
   const { isRefreshItself = false } = option ?? {};
 
-  let timer: number;
+  let timer: NodeJS.Timeout;
 
   function preventRefreshItself(...rest) {
     if (preventRefreshItselfTimer) {
       clearTimeout(preventRefreshItselfTimer);
     }
 
-    const args = Array.prototype.slice.call(rest);
-
     preventRefreshItselfTimer = setTimeout(() => {
       if (typeof fn === "function") {
-        fn.apply(this, args);
+        // 使用 fn 作为 this
+        fn.apply(fn, rest);
       }
     }, delay);
   }
@@ -40,11 +39,9 @@ export default <T = () => void>(
       clearTimeout(timer);
     }
 
-    const args = Array.prototype.slice.call(rest);
-
     timer = setTimeout(() => {
       if (typeof fn === "function") {
-        fn.apply(this, args);
+        fn.apply(fn, rest);
       }
     }, delay);
   };

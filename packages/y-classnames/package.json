@@ -1,7 +1,7 @@
 {
-  "name": "@yomua/y-indexeddb",
-  "version": "0.0.5",
-  "description": "Indexed DB",
+  "name": "@yomua/y-classnames",
+  "version": "0.0.1",
+  "description": "处理 class",
   "main": "./dist/cjs/index.js",
   "module": "./dist/es/index.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "keywords": [],
   "author": "yomua",
   "license": "ISC",
+  "devDependencies": {},
   "files": [
     "dist",
     "package.json"

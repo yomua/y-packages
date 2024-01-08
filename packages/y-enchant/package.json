@@ -2,9 +2,10 @@
   "name": "@yomua/y-enchant",
   "version": "0.0.1",
   "description": "此包将附魔 JavaScript",
-  "main": "dist/y-enchant.js",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/es/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c"
   },
   "keywords": [],
   "author": "",
