@@ -2,8 +2,8 @@
   "name": "@yomua/y-indexeddb",
   "version": "0.0.5",
   "description": "Indexed DB",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/es/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "github": "https://github.com/yomua/y-packages/tree/master/packages/y-indexeddb",
   "scripts": {
     "build": "rollup -c"

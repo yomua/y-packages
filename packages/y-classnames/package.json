@@ -1,9 +1,9 @@
 {
   "name": "@yomua/y-classnames",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "处理 class",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/es/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "github": "https://github.com/yomua/y-packages/tree/master/packages/y-classnames",
   "scripts": {
     "build": "rollup -c"

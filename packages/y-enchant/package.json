@@ -2,8 +2,8 @@
   "name": "@yomua/y-enchant",
   "version": "0.0.1",
   "description": "附魔 JavaScript",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/es/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "github": "https://github.com/yomua/y-packages/tree/master/packages/y-enchant",
   "scripts": {
     "build": "rollup -c"

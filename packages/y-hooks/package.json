@@ -3,8 +3,8 @@
   "version": "0.0.2",
   "description": "基于 React 的 hooks",
   "type": "module",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/es/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "github": "https://github.com/yomua/y-packages/tree/master/packages/y-hooks",
   "scripts": {
     "build": "rollup -c"
