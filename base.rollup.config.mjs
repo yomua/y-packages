@@ -27,6 +27,14 @@ export default function (options) {
       },
       plugins: [...DEFAULT_PLUGINS, ...plugins],
     },
+    {
+      input,
+      output: {
+        file: `dist/cjs/${outputFileName}`,
+        format: 'cjs',
+      },
+      plugins: [...DEFAULT_PLUGINS, ...plugins],
+    },
 
     ...defineDts(),
   ]
