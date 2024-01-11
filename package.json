@@ -10,7 +10,11 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "yarn workspaces run build"
+    "build": "yarn workspaces run build",
+    "publish:y-screw": "yarn workspace @yomua/y-screw publish--access=public",
+    "publish:y-tlog": "yarn workspace @yomua/y-tlog publish--access=public",
+    "publish:y-server": "yarn workspace @yomua/y-server publish--access=public",
+    "publish:y-hooks": "yarn workspace @yomua/y-hooks publish--access=public"
   },
   "keywords": [],
   "author": "yomua",
