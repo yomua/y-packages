@@ -3,6 +3,7 @@
   "version": "0.0.2",
   "description": "自定义事件",
   "type": "module",
+  "main": "./dist/cjs/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "github": "https://github.com/yomua/y-packages/tree/master/packages/y-eventemitter",
@@ -15,6 +16,7 @@
   "dependencies": {},
   "files": [
     "dist",
-    "package.json"
+    "package.json",
+    "README.md"
   ]
 }

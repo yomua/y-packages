@@ -40,7 +40,7 @@
 
 - `yarn workspace <workspace_name> <command>`
   在指定的 package 中运行指定的命令，如：
-  `yarn workspace @yomua/yscrew add react`: 将 React 添加到 `@yomua/yscrew` 项目中。
+  `yarn workspace @yomua/y-screw add react`: 将 React 添加到 `@yomua/y-screw` 项目中。
 
 - `yarn <add|remove> <package> -W`
 

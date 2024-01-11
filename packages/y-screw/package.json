@@ -2,6 +2,7 @@
   "name": "@yomua/y-screw",
   "version": "0.0.5",
   "description": "为 JavaScript 提供额外的功能",
+  "main": "./dist/cjs/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "github": "https://github.com/yomua/y-packages/tree/master/packages/y-screw",
@@ -11,5 +12,10 @@
   "keywords": [],
   "author": "yomua",
   "license": "ISC",
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
   "devDependencies": {}
 }

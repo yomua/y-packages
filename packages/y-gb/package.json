@@ -1,20 +1,23 @@
 {
-  "name": "@yomua/y-enchant",
+  "name": "@yomua/y-gb",
   "version": "0.0.1",
-  "description": "附魔 JavaScript",
+  "description": "node 服务库",
   "main": "./dist/cjs/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "github": "https://github.com/yomua/y-packages/tree/master/packages/y-enchant",
+  "github": "https://github.com/yomua/y-packages/tree/master/packages/y-gb",
   "scripts": {
     "build": "rollup -c"
   },
   "keywords": [],
-  "author": "",
+  "author": "yomua",
   "license": "ISC",
   "files": [
     "dist",
     "package.json",
     "README.md"
-  ]
+  ],
+  "dependencies": {
+    "chalk": "^5.3.0"
+  }
 }
