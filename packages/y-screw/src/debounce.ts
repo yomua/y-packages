@@ -7,42 +7,42 @@
 let preventRefreshItselfTimer: NodeJS.Timeout
 
 export default <T = () => void>(
-  fn: T,
-  delay: number,
-  option?: {
-    isRefreshItself?: boolean
-  },
+    fn: T,
+    delay: number,
+    option?: {
+        isRefreshItself?: boolean
+    },
 ) => {
-  const { isRefreshItself = false } = option ?? {}
+    const { isRefreshItself = false } = option ?? {}
 
-  let timer: NodeJS.Timeout
+    let timer: NodeJS.Timeout
 
-  function preventRefreshItself(...rest) {
-    if (preventRefreshItselfTimer) {
-      clearTimeout(preventRefreshItselfTimer)
+    function preventRefreshItself(...rest) {
+        if (preventRefreshItselfTimer) {
+            clearTimeout(preventRefreshItselfTimer)
+        }
+
+        preventRefreshItselfTimer = setTimeout(() => {
+            if (typeof fn === 'function') {
+                // 使用 fn 作为 this
+                fn.apply(fn, rest)
+            }
+        }, delay)
     }
 
-    preventRefreshItselfTimer = setTimeout(() => {
-      if (typeof fn === 'function') {
-        // 使用 fn 作为 this
-        fn.apply(fn, rest)
-      }
-    }, delay)
-  }
-
-  if (isRefreshItself) {
-    return preventRefreshItself
-  }
-
-  return function (...rest) {
-    if (timer) {
-      clearTimeout(timer)
+    if (isRefreshItself) {
+        return preventRefreshItself
     }
 
-    timer = setTimeout(() => {
-      if (typeof fn === 'function') {
-        fn.apply(fn, rest)
-      }
-    }, delay)
-  }
+    return function (...rest) {
+        if (timer) {
+            clearTimeout(timer)
+        }
+
+        timer = setTimeout(() => {
+            if (typeof fn === 'function') {
+                fn.apply(fn, rest)
+            }
+        }, delay)
+    }
 }
