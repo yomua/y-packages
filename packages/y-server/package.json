@@ -1,6 +1,6 @@
 {
   "name": "@yomua/y-server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "node 服务库",
   "main": "./dist/cjs/index.js",
   "module": "./dist/index.js",
