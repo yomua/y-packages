@@ -2,7 +2,7 @@
   "name": "@yomua/y-indexeddb",
   "version": "0.0.5",
   "description": "Indexed DB",
-  "main": "./dist/cjs/index.js",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "github": "https://github.com/yomua/y-packages/tree/master/packages/y-indexeddb",

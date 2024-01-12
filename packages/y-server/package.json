@@ -2,7 +2,7 @@
   "name": "@yomua/y-server",
   "version": "0.0.2",
   "description": "node 服务库",
-  "main": "./dist/cjs/index.js",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "github": "https://github.com/yomua/y-packages/tree/master/packages/y-server",
