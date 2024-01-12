@@ -1,16 +1,16 @@
-import crypto from 'crypto'
+import * as crypto from 'crypto'
 
 function hashString(inputString: string) {
-    const hash = crypto.createHash('sha256')
-    hash.update(inputString)
-    return hash.digest('hex')
+  const hash = crypto.createHash('sha256')
+  hash.update(inputString)
+  return hash.digest('hex')
 }
 
-type Options = {
-    // 一个持久化上下文, 即: cache, 存放要被缓存的函数
-    context?: Map<any, (...rest: any[]) => any>
-    // map 的 key: 可以是任何值(包括函数、对象或任何原始值)
-    resolver?: unknown
+export type Options = {
+  // 一个持久化上下文, 即: cache, 存放要被缓存的函数
+  context?: Map<any, (...rest: any[]) => any>
+  // map 的 key: 可以是任何值(包括函数、对象或任何原始值)
+  resolver?: unknown
 }
 
 // 只能在全局或某个持久上下文声明 cache
@@ -24,32 +24,32 @@ type Options = {
 const cache = new Map()
 
 export default function memoizeFn(
-    fn: {
-        (...args: any[]): void
-        cache?: Map<any, (...args: any[]) => void> // 静态属性
-    },
-    options?: Options,
+  fn: {
+    (...args: any[]): void
+    cache?: Map<any, (...args: any[]) => void> // 静态属性
+  },
+  options?: Options,
 ) {
-    if (typeof fn !== 'function') {
-        throw new Error('fn must be a function')
-    }
+  if (typeof fn !== 'function') {
+    throw new Error('fn must be a function')
+  }
 
-    const { resolver, context } = options ?? {}
+  const { resolver, context } = options ?? {}
 
-    if (context && !(context instanceof Map)) {
-        throw new Error('context must be a Map')
-    }
+  if (context && !(context instanceof Map)) {
+    throw new Error('context must be a Map')
+  }
 
-    fn.cache = context ?? cache
+  fn.cache = context ?? cache
 
-    const key = resolver || hashString(fn.toString())
+  const key = resolver || hashString(fn.toString())
 
-    if (!fn.cache.has(key)) {
-        fn.cache.set(key, fn)
-    }
+  if (!fn.cache.has(key)) {
+    fn.cache.set(key, fn)
+  }
 
-    return fn.cache.get(key) as {
-        (...args: any[]): void
-        cache?: Map<any, (...args: any[]) => void> // 静态属性
-    }
+  return fn.cache.get(key) as {
+    (...args: any[]): void
+    cache?: Map<any, (...args: any[]) => void> // 静态属性
+  }
 }

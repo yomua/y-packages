@@ -1,9 +1,9 @@
-import type { GB } from './index.d'
+import type { Server } from './index.d'
 import listener from './methods/listener.js'
 import cors from './methods/cors.js'
 import start from './methods/start.js'
 
-export default function gb(): GB {
+export default function Server(): Server {
   if (new.target) {
     throw new TypeError('Cannot use new to call gb')
   }

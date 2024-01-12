@@ -33,6 +33,19 @@
 
 工作区是一种组织多包项目的方式，它通过帮助管理包之间的依赖关系、提供共享依赖和更好地组织项目结构来改善项目管理。
 
+# 如何在其他包中使用另一个包
+
+```js
+// package @yomua/y-screw
+
+// pakcage @yomua/y-server
+import server from '@yomua/y-screw'
+```
+
+可以这样直接使用，并不需要安装依赖到 `@yomua/y-server` 中，会自动引用 `@yomua/y-screw` 包本地所在的位置。
+
+但是需要注意：你需要将 `@yomua/y-screw` 设置为 `@yomua/y-server` 的 dep 或 devDep.
+
 # 常用命令
 
 - `yarn workspaces info`
@@ -50,7 +63,7 @@
 
   将指定的 包（package.json 的 name） 发布到 npm
 
-  注意: 中括号的意思代表可选
+  注意: 中括号的意思代表可选, 并且首先你要切换仓库地址到 npm 的仓库.
 
   `[--access=public]`: 当需要把包发布到组织时，如果不是付费的，那么需要添加此命令才能发布共享包，否则只能是私有包。
 
@@ -59,3 +72,11 @@
   空间下的所有包都执行 `yarn run build` 命令
 
   对于执行成功的成功打包, 执行失败的, 命令则中断.
+
+# FAQ
+
+## 无法在一个包 a 中使用另一个包 b
+
+- 需要先发布一版正确的，带有类型的包 a 到 npm 仓库
+
+  可能是要让 yarn monorepo 识别吧。

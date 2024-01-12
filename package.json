@@ -3,18 +3,19 @@
   "version": "0.0.1",
   "private": true,
   "description": "yomua 的 packages",
-  "module": "dist/index.js",
-  "main": "dist/cjs/index.js",
-  "types": "dist/index.d.ts",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
     "build": "yarn workspaces run build",
-    "publish:y-screw": "yarn workspace @yomua/y-screw publish--access=public",
-    "publish:y-tlog": "yarn workspace @yomua/y-tlog publish--access=public",
-    "publish:y-server": "yarn workspace @yomua/y-server publish--access=public",
-    "publish:y-hooks": "yarn workspace @yomua/y-hooks publish--access=public"
+    "b:screw": "yarn workspace @yomua/y-screw build",
+    "b:tlog": "yarn workspace @yomua/y-tlog build",
+    "b:server": "yarn workspace @yomua/y-server build",
+    "b:hooks": "yarn workspace @yomua/y-hooks build",
+    "p:screw": "yarn workspace @yomua/y-screw p",
+    "p:tlog": "yarn workspace @yomua/y-tlog publish --access=public",
+    "p:server": "yarn workspace @yomua/y-server publish --access=public",
+    "p:hooks": "yarn workspace @yomua/y-hooks publish --access=public"
   },
   "keywords": [],
   "author": "yomua",
