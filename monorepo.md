@@ -77,6 +77,30 @@ import server from '@yomua/y-screw'
 
 ## 无法在一个包 a 中使用另一个包 b
 
-- 需要先发布一版正确的，带有类型的包 a 到 npm 仓库
+需要先发布一版正确的，带有类型的包 a 到 npm 仓库
 
-  可能是要让 yarn monorepo 识别吧。
+- 可能是要让 yarn monorepo 识别吧.
+
+## 使用发布命令时却发布到 yarn 的仓库？
+
+这可能是因为你配置了 package.json, 然后使用 `yarn 命令` 的形式, 如:
+
+```js
+{
+  scripts:{
+    "p:screw": "yarn workspace @yomua/y-screw publish --access=public",
+  }
+}
+```
+
+执行:
+
+- `yarn p:screw`
+
+这会导致 publish 到 yarn 的仓库: `https://registry.yarnpkg.com`
+
+解决方法是: 使用 `npm run 命令` 的形式,即:
+
+- `npm run p:screw`
+
+这样就能发布到 npm 仓库: `https://registry.npmjs.org`

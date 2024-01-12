@@ -1,15 +1,13 @@
 {
   "name": "@yomua/y-screw",
-  "version": "0.0.7",
+  "version": "0.0.6",
   "description": "为 JavaScript 提供额外的功能",
   "main": "./dist/cjs/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "github": "https://github.com/yomua/y-packages/tree/master/packages/y-screw",
   "scripts": {
-    "build": "rollup -c",
-    "pu": "npm publish",
-    "p": "yarn version && npm run pu"
+    "build": "rollup -c"
   },
   "keywords": [],
   "author": "yomua",

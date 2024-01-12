@@ -12,7 +12,7 @@
     "b:tlog": "yarn workspace @yomua/y-tlog build",
     "b:server": "yarn workspace @yomua/y-server build",
     "b:hooks": "yarn workspace @yomua/y-hooks build",
-    "p:screw": "yarn workspace @yomua/y-screw p",
+    "p:screw": "yarn workspace @yomua/y-screw publish --access=public",
     "p:tlog": "yarn workspace @yomua/y-tlog publish --access=public",
     "p:server": "yarn workspace @yomua/y-server publish --access=public",
     "p:hooks": "yarn workspace @yomua/y-hooks publish --access=public"
