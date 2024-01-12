@@ -8,7 +8,8 @@
   "github": "https://github.com/yomua/y-packages/tree/master/packages/y-screw",
   "scripts": {
     "build": "rollup -c",
-    "p": "yarn version && npm publish --access=public"
+    "pu": "npm publish --access=public",
+    "p": "yarn version && npm run pu"
   },
   "keywords": [],
   "author": "yomua",
