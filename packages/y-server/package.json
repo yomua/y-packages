@@ -18,5 +18,7 @@
     "package.json",
     "README.md"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "@yomua/y-screw": "^0.0.7"
+  }
 }
