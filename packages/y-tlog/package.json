@@ -1,7 +1,8 @@
 {
   "name": "@yomua/y-tlog",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "用于终端打印彩色日志",
+  "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
