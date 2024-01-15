@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
+    "module": "ESNext",
     "moduleResolution": "node",
     "jsx": "react",
     "esModuleInterop": true,
@@ -8,7 +9,7 @@
     "sourceMap": true,
     "baseUrl": "./",
     "paths": {
-      "@/*": ["packages/*"]
+      "@/*": ["packages/*"] 
     },
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
