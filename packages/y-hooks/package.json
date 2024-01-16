@@ -1,6 +1,6 @@
 {
   "name": "@yomua/y-hooks",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "基于 React 的 hooks",
   "type": "module",
   "main": "./dist/index.js",
