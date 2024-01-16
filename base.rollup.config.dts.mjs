@@ -7,6 +7,7 @@ const DEFAULT_PLUGINS = [
 export default function (options) {
   const {
     plugins = [],
+    dts = [],
     input = 'src/index.d.ts',
     outputFileName = 'index.d.ts',
   } = options || {}
@@ -22,5 +23,6 @@ export default function (options) {
       ],
       plugins: [...DEFAULT_PLUGINS, ...plugins],
     },
+    ...dts,
   ]
 }

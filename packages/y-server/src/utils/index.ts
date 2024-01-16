@@ -1,5 +1,5 @@
-import crypto from 'crypto'
-import os from 'os'
+import * as crypto from 'crypto'
+import * as os from 'os'
 
 // 获取网络接口列表
 const networkInterfaces = os.networkInterfaces()

@@ -1,4 +1,4 @@
-import http from 'http'
+import * as http from 'http'
 
 import store from '../store.js'
 import { isEmptyObject } from '@yomua/y-screw'

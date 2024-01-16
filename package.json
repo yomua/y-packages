@@ -12,10 +12,12 @@
     "b:tlog": "yarn workspace @yomua/y-tlog build",
     "b:server": "yarn workspace @yomua/y-server build",
     "b:hooks": "yarn workspace @yomua/y-hooks build",
+    "b:db": "yarn workspace @yomua/y-indexeddb build",
     "p:screw": "yarn workspace @yomua/y-screw publish --access=public",
     "p:tlog": "yarn workspace @yomua/y-tlog publish --access=public",
     "p:server": "yarn workspace @yomua/y-server publish --access=public",
-    "p:hooks": "yarn workspace @yomua/y-hooks publish --access=public"
+    "p:hooks": "yarn workspace @yomua/y-hooks publish --access=public",
+    "p:db": "yarn workspace @yomua/y-indexeddb publish --access=public"
   },
   "keywords": [],
   "author": "yomua",
@@ -31,6 +33,7 @@
     "rollup-plugin-bundleutils": "^2.0.1",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-dts": "^6.1.0",
+    "tsc-alias": "^1.8.8",
     "tslib": "^2.6.2",
     "typescript": "^5.3.3"
   },

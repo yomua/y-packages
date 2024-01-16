@@ -1,3 +1,5 @@
-import extendedConfig from "../../base.rollup.config.mjs";
+import extendedConfig from '../../base.rollup.config.mjs'
 
-export default extendedConfig();
+export default extendedConfig({
+  external: ['crypto'],
+})

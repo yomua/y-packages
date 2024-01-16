@@ -22,6 +22,7 @@ export default function (options) {
     outputFileName = 'index.js',
     cjs = false,
     external = [],
+    dts = [],
   } = options || {}
 
   return [
@@ -34,7 +35,8 @@ export default function (options) {
       plugins: [...DEFAULT_PLUGINS, ...plugins],
       external,
     },
-    cjs && { // 在 node + ESModule 环境中, package.json 只会对 main 字段生效, 需要注意包中的额外包是否支持 cjs -> https://github.com/SunshowerC/blog/issues/8
+    cjs && {
+      // 在 node + ESModule 环境中, package.json 只会对 main 字段生效, 需要注意包中的额外包是否支持 cjs -> https://github.com/SunshowerC/blog/issues/8
       input,
       output: {
         file: `dist/cjs/${outputFileName}`,
@@ -44,6 +46,6 @@ export default function (options) {
       external,
     },
 
-    ...defineDts(),
+    ...defineDts({ dts }),
   ].filter(Boolean)
 }

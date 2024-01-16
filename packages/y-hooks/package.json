@@ -18,7 +18,9 @@
   },
   "author": "yomua",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "@yomua/y-screw": "^0.0.7"
+  },
   "files": [
     "dist",
     "package.json",
