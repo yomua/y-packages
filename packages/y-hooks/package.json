@@ -1,6 +1,6 @@
 {
   "name": "@yomua/y-hooks",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "基于 React 的 hooks",
   "type": "module",
   "main": "./dist/index.js",
@@ -8,7 +8,9 @@
   "types": "./dist/index.d.ts",
   "github": "https://github.com/yomua/y-packages/tree/master/packages/y-hooks",
   "scripts": {
-    "build": "rollup -c"
+    "build": "yarn build:tsc && yarn build:rollup",
+    "build:tsc": "tsc && tsc-alias && node resolveImport.cjs",
+    "build:rollup": "rollup -c"
   },
   "keywords": [],
   "peerDependencies": {
