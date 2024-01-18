@@ -1,18 +1,20 @@
-// 此文件用来解析 dist 中的 import 语句
+// 此文件用来解析 lib 中的 import 语句
 // import useURL from './useURL' => import useURL from './useURL/index.js'
+// import test from './test => import test from './test.js'
+// 注: lib 文件夹中的文件是经过 tsc 编译 ts 后所形成的 js 文件.
 
 const fsPromises = require('fs').promises
 const fs = require('fs')
 const path = require('path')
 
-const tsConfig = require('./tsconfig.json')
+const [nodeExePath, currentFilePath, libPath] = process.argv
 
 const appendSuffix1 = '/index.js'
 const appendSuffix2 = '.js'
 
 void (async function () {
   try {
-    const p = path.resolve(__dirname, `./${tsConfig.compilerOptions.outDir}`)
+    const p = path.resolve(__dirname, 'packages', libPath)
     const paths = await fsPromises.readdir(p)
     // console.log(paths)
     const stack = [...paths]

@@ -1,0 +1,12 @@
+{
+  "write": {
+    "isWrite": false,
+    "filePath": "./",
+    "filename": "y-tlog",
+    "fileSuffix": "log"
+  },
+  "request": {
+    "isRequest": false,
+    "url": ""
+  }
+}

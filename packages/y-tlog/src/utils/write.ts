@@ -1,10 +1,14 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
-import { DEFAULT_WRITE_CONFIG } from './constants.js'
+import { WriteConfig } from '../index.d'
+import DEFAULT_CONFIG from '../../defaultConfig.json'
+
+import { IS_NODE } from './constants'
 
 // 将数据追加到已有内容之前
 const appendFileToFront = function (data: string) {
+  // 从 write.config 取, 这样可以根据配置决定操作
   const { filePath, filename, fileSuffix } = write.config
 
   const completePath = path.join(filePath, `${filename}.${fileSuffix}`)
@@ -24,7 +28,7 @@ const appendFileToFront = function (data: string) {
 }
 
 const write = function (data: string) {
-  if (!write.config.isWrite) {
+  if (!write.config.isWrite || !IS_NODE) {
     return
   }
 
@@ -37,7 +41,6 @@ const write = function (data: string) {
   appendFileToFront(data)
 }
 
-// 默认情况不写
-write.config = DEFAULT_WRITE_CONFIG
+write.config = DEFAULT_CONFIG.write as WriteConfig
 
 export default write

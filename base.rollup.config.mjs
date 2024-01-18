@@ -1,4 +1,5 @@
 import del from 'rollup-plugin-delete'
+import json from '@rollup/plugin-json'
 import { terser } from 'rollup-plugin-bundleutils'
 import typescript from '@rollup/plugin-typescript'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
@@ -7,11 +8,13 @@ import defineDts from './base.rollup.config.dts.mjs'
 
 const DEFAULT_PLUGINS = [
   del({ targets: 'dist/*', verbose: true, hook: 'buildEnd' }),
+  json(),
   terser(), // 编译后压缩代码, tree shaking 之类的.
   // nodeResolve(), // 如果一个包, 你需要内置到你写的包中(直接将源码写入项目), 则需要此插件解析;
   typescript({
     // 编译 typescript
     compilerOptions: { lib: ['es5', 'es6', 'dom'], target: 'es5' },
+    sourceMap: false,
   }),
 ]
 

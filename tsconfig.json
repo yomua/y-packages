@@ -6,10 +6,11 @@
     "jsx": "react",
     "esModuleInterop": true,
     "downlevelIteration": true,
+    "resolveJsonModule": true,
     "sourceMap": true,
     "baseUrl": "./",
     "paths": {
-      "@/*": ["packages/*"] 
+      "@/*": ["packages/*"]
     },
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,

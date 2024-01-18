@@ -31,13 +31,13 @@ export default function memoizeFn(
   options?: Options,
 ) {
   if (typeof fn !== 'function') {
-    throw new Error('fn must be a function')
+    throw new Error('memoizeFn expects got a function')
   }
 
   const { resolver, context } = options ?? {}
 
   if (context && !(context instanceof Map)) {
-    throw new Error('context must be a Map')
+    throw new Error('context must be a Map Instance')
   }
 
   fn.cache = context ?? cache

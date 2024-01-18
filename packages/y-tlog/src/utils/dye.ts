@@ -1,6 +1,4 @@
-import chalk from 'chalk'
-
-import { CHALK_COLOR_MAP } from './constants.js'
+import { CHALK_COLOR_MAP } from './constants'
 
 const dye = {
   info: function (...messages: string[]) {

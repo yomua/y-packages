@@ -1,5 +1,11 @@
-export function isPrimitive(value: any): boolean {
-  return typeof value !== 'object' || value === null
+export function isPrimitive(
+  value: any,
+): value is string | number | boolean | undefined {
+  return typeof value !== 'object' && value === null
+}
+
+export function isSymbol(value: any): value is symbol {
+  return typeof value === 'symbol'
 }
 
 export function polyfillConsole() {

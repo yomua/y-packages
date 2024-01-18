@@ -1,5 +1,7 @@
 import chalk from 'chalk'
 
+import { getEnv } from './index'
+
 export const CHALK_COLOR_MAP = {
   error: chalk.red,
   info: chalk.white,
@@ -7,9 +9,5 @@ export const CHALK_COLOR_MAP = {
   warning: chalk.yellow,
 }
 
-export const DEFAULT_WRITE_CONFIG = {
-  isWrite: false,
-  filePath: process.cwd(),
-  filename: 'y-tlog',
-  fileSuffix: 'log',
-}
+export const IS_BROWSER = getEnv() === 'browser'
+export const IS_NODE = getEnv() === 'node'
