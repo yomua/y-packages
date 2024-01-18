@@ -1,11 +1,15 @@
 {
   "name": "@yomua/y-tlog",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "用于终端打印彩色日志",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yomua/y-packages/tree/master/packages/y-tlog"
+  },
   "github": "https://github.com/yomua/y-packages/tree/master/packages/y-tlog",
   "scripts": {
     "build": "rollup -c"
