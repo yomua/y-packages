@@ -1,9 +1,8 @@
 {
   "name": "@yomua/y-tlog",
-  "version": "0.1.0",
-  "description": "用于终端打印彩色日志",
-  "type": "module",
-  "main": "./dist/index.js",
+  "version": "0.1.2",
+  "description": "用于终端和浏览器打印彩色日志",
+  "main": "./dist/cjs/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "repository": {
@@ -22,8 +21,8 @@
     "package.json",
     "README.md"
   ],
-  "devDependencies": {},
-  "dependencies": {
+  "devDependencies": {
     "chalk": "^5.3.0"
-  }
+  },
+  "dependencies": {}
 }
