@@ -4,11 +4,11 @@ import dye from './utils/dye'
 import write from './utils/write'
 import style from './utils/style'
 import request from './utils/request'
-import { polyfillConsole } from './utils'
 import dir from './call/dir'
 import table from './call/table'
 import group from './call/group'
 import error from './call/error'
+import { polyfillConsole } from './utils'
 
 polyfillConsole()
 

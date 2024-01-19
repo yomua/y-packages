@@ -1,4 +1,5 @@
 {
+  "env": "production",
   "write": {
     "isWrite": false,
     "filePath": "./",
