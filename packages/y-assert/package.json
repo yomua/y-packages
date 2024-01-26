@@ -1,0 +1,25 @@
+{
+  "name": "@yomua/y-assert",
+  "version": "0.0.1",
+  "description": "简单的断言",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yomua/y-packages/tree/master/packages/y-assert"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "keywords": [],
+  "author": "yomua",
+  "license": "ISC",
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
+  "devDependencies": {},
+  "dependencies": {}
+}

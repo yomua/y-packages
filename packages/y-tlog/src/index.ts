@@ -4,22 +4,24 @@ import dye from './utils/dye'
 import write from './utils/write'
 import style from './utils/style'
 import request from './utils/request'
+import { polyfillConsole, transformToStrForLog } from './utils/index'
 import dir from './call/dir'
+import warn from './call/warn'
 import table from './call/table'
 import group from './call/group'
 import error from './call/error'
-import { polyfillConsole } from './utils'
+import success from './call/success'
 
 polyfillConsole()
 
-const log = (...messages: string[]) => {
-  const data = messages.join('')
+const log = (...messages: any[]) => {
+  console.log(...messages)
 
-  console.log(data)
+  request(null, { data: messages })
 
-  request(null, { data })
-
-  write(data)
+  write(transformToStrForLog(messages), {
+    type: 'info',
+  })
 }
 
 // 文本染色
@@ -27,12 +29,6 @@ log.dye = dye
 
 // 风格
 log.style = style
-
-// hex
-log.hex = chalk.hex
-
-// rgb
-log.rgb = chalk.rgb
 
 // 逃生到 chalk
 log.chalk = chalk
@@ -45,6 +41,10 @@ log.table = table
 log.dir = dir
 
 log.error = error
+
+log.success = success
+
+log.warn = warn
 
 // 主动写入数据到磁盘 - 由 log.writeConfig 配置
 log.write = write

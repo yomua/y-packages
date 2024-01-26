@@ -4,4 +4,10 @@
 
 ## 依赖浏览器环境
 
-- `url-change.ts`
+- `urlChange`
+
+
+
+# 测试
+
+在 src 目录下所有 *.test.mjs | *.test.cjs | *.test.js 都会被执行

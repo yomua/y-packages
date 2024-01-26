@@ -3,10 +3,10 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "react", // 开启 jsx
     "esModuleInterop": true,
     "downlevelIteration": true,
-    "resolveJsonModule": true,
+    "resolveJsonModule": true, // 允许 ts 认识 JSON 文件
     "sourceMap": true,
     "baseUrl": "./",
     "paths": {

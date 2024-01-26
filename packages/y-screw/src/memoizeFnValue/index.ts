@@ -1,4 +1,4 @@
-import isNil from './is-nil'
+import isNil from '../isNil'
 
 // => 分别调用 memoize(fn) 和 memoize(fn)
 // => 这二者返回的 memoized 不同, 挂载的 cache 不同, cache 是不会相互影响的.

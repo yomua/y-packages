@@ -1,4 +1,4 @@
-import addBigNumbers from '../src/add-big-numbers'
+import addBigNumbers from '../src/addBigNumbers'
 
 const value = addBigNumbers(
     '11111111111.11111111111111111111111111111111111111111111111',

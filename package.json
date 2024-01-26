@@ -13,11 +13,13 @@
     "b:server": "yarn workspace @yomua/y-server build",
     "b:hooks": "yarn workspace @yomua/y-hooks build",
     "b:db": "yarn workspace @yomua/y-indexeddb build",
+    "b:assert": "yarn workspace @yomua/y-assert build",
     "p:screw": "yarn workspace @yomua/y-screw publish --access=public",
     "p:tlog": "yarn workspace @yomua/y-tlog publish --access=public",
     "p:server": "yarn workspace @yomua/y-server publish --access=public",
     "p:hooks": "yarn workspace @yomua/y-hooks publish --access=public",
-    "p:db": "yarn workspace @yomua/y-indexeddb publish --access=public"
+    "p:db": "yarn workspace @yomua/y-indexeddb publish --access=public",
+    "p:assert": "yarn workspace @yomua/y-assert publish --access=public"
   },
   "keywords": [],
   "author": "yomua",
@@ -28,6 +30,7 @@
     "@rollup/plugin-typescript": "^11.1.5",
     "@types/node": "^20.11.0",
     "@types/react": "^18.2.46",
+    "module-alias": "^2.2.3",
     "prettier": "^3.1.1",
     "react": "^18.2.0",
     "rollup": "^4.9.2",
@@ -37,6 +40,5 @@
     "tsc-alias": "^1.8.8",
     "tslib": "^2.6.2",
     "typescript": "^5.3.3"
-  },
-  "dependencies": {}
+  }
 }

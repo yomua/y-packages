@@ -9,7 +9,7 @@
   "github": "https://github.com/yomua/y-packages/tree/master/packages/y-hooks",
   "scripts": {
     "build": "yarn build:tsc && yarn build:rollup",
-    "build:tsc": "tsc && tsc-alias && node ../../resolveImport.cjs y-hooks/lib",
+    "build:tsc": "tsc && tsc-alias && node ../../scripts/resolveImport.cjs y-hooks/lib",
     "build:rollup": "rollup -c"
   },
   "keywords": [],

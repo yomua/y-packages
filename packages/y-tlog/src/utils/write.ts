@@ -1,14 +1,15 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
-import { WriteConfig } from '../index.d'
+import { LogType, WriteConfig } from '../index.d'
 import DEFAULT_CONFIG from '../../defaultConfig.json'
 
 import { IS_NODE } from './constants'
+import { transformToStrForLog } from './index'
 
 // 将数据追加到已有内容之前
 const appendFileToFront = function (data: string) {
-  // 从 write.config 取, 这样可以根据配置决定操作
+  // 从 write.config 取, 这样每次输出都可以根据配置决定操作
   const { filePath, filename, fileSuffix } = write.config
 
   const completePath = path.join(filePath, `${filename}.${fileSuffix}`)
@@ -27,16 +28,24 @@ const appendFileToFront = function (data: string) {
   fs.writeFileSync(completePath, updatedContent)
 }
 
-const write = function (data: string) {
+const write = function (
+  data: string,
+  config: {
+    type: LogType
+  },
+) {
+  // 只允许启用了配置, 且环境为 node
   if (!write.config.isWrite || !IS_NODE) {
     return
   }
 
-  // 格式化为字符串
-  data = typeof data === 'string' ? data + '\n' : JSON.stringify(data) + '\n'
+  const { type = 'info' } = config ?? {}
 
-  // 设置日期
-  data = `[${new Date().toLocaleString()}] ${data}`
+  // 格式化为字符串
+  data = transformToStrForLog(data) + '\n'
+
+  // 设置日期和类型
+  data = `[${new Date().toLocaleString()}] [${type.toUpperCase()}] ${data}`
 
   appendFileToFront(data)
 }

@@ -9,19 +9,42 @@
 ```js
 import log from '@yomua/t-log'
 
-log(1, 2, 3, 4, 5) // 12345
+/**
+ * 打印: 
+    1 2 3 4 5
+ * 日志记录: 
+    [2024/1/22 13:52:45] [INFO] 1 2 3 4 5
+ */
+log(1, 2, 3, 4, 5)
 
 /**
-  Parent
-    parent_message
-    son
-      son_message
-      grandSon
-        grandSon_message
+ * 打印: 
+    { name: 'yomua' } [ 1, 2 ]
+ * 日志记录: 
+    [2024/1/26 17:47:05] [INFO] {"name":"yomua"} 1 2
+ */
+log({ name: 'yomua' }, [1, 2])
+
+/**
+ * 打印: 
+    Parent
+      parent_message
+      son
+        son_message
+        grandSon
+          grandSon_message
+ * 日志记录: 
+    [2024/1/22 11:43:31] [GROUP] Parent
+      "parent_message"
+    [2024/1/22 11:43:31] [GROUP] son
+      "son_message"
+    [2024/1/22 11:43:31] [GROUP] grandSon
+      "grandSon_message"
  */
 log.group('Parent', [
   {
     message: 'parent_message',
+    type: 'error',
   },
   {
     message: {
@@ -42,20 +65,50 @@ log.group('Parent', [
 ])
 
 /**
+ * 打印: 
   ┌─────────┬─────────┬──────┐
   │ (index) │  name   │ age  │
   ├─────────┼─────────┼──────┤
   │    0    │ 'yomua' │ '18' │
   └─────────┴─────────┴──────┘
+ * 日志记录:
+    [2024/1/22 14:21:43] [TABLE] {"name":"yomua","age":"18"}
  */
 log.table([{ name: 'yomua', age: '18' }])
 
-// [ { name: 'yomua' } ] => Array
+/**
+ * 打印: 
+    [ { name: 'yomua' } ]
+ * 日志记录: 
+    [2024/1/22 14:22:33] [DIR] [{"name":"yomua"}]
+ */
 log.dir([{ name: 'yomua' }])
 
-// 在终端表现和 log 一样: error
-// 在浏览器端表现和 console.error 一样, 将会打印错误, 包含堆栈信息
+/**
+ * 打印: 
+    error
+ * 日志记录: 
+    [2024/1/24 16:52:59] [ERROR] error
+ */
 log.error('error')
+
+/**
+ * 打印: 
+    success
+ * 日志记录: 
+    [2024/1/24 16:52:59] [SUCCESS] success
+ */
+log.success('success')
+
+/**
+ * 打印: 
+    warn1 warn2
+ * 日志记录: 
+    [2024/1/22 14:22:33] [WARN]
+      warn1
+      warn2
+ */
+log.warn('warn1', 'warn2')
 ```
 
 ## 染色
@@ -70,10 +123,12 @@ dye.error('yomua', 'To') // yomuaTo (红色)
 dye.warning('yomua', 'To') // yomuaTo (黄色)
 
 // 16 进制
-log(log.hex('#ffffff')('yomua')) // yomua (白色)
+log(dye.hex('#ffffff')('yomua')) // yomua (白色)
+log(dye.bgHex('#fff')('yomua')) // yomua (背景白色)
 
 // rgb 色彩
-log(log.rgb(255, 0, 0)('yomua')) // yomua (红色)
+log(dye.rgb(255, 0, 0)('yomua')) // yomua (红色)
+log(dye.bgRgb(255, 0, 0)('yomua')) // yomua (背景红色)
 ```
 
 ## 风格
@@ -115,6 +170,10 @@ log.dir([{ name: 'yomua' }])
 
 ## 发送请求
 
+node 环境使用 [http.request()](https://nodejs.cn/api/v18/http.html#httprequesturl-options-callback)
+
+browser 环境使用 [fetch()](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API)
+
 ```js
 import log from '@yomua/t-log'
 
@@ -153,10 +212,27 @@ log.requestConfig.onReceiver = (chunk) => {
 
 // 任何一个 log 都将发送请求
 log('yomua')
-log.group('title', [{message:'yomua'}])
+log.group('title', [{ message: 'yomua' }])
 log.dir([{ name: 'yomua' }])
-
 ```
+
+对于发送请求操作, 携带的数据为原始数据, 即: log 时使用什么数据, 就发送什么类型数据.
+
+特殊情况: 当传入多个参数给 log 时, 会将这些参数组装成一个数组发送.
+
+```js
+// 发送 [1, 2, 3, 4]
+log(1, 2, 3, 4)
+
+// 发送 {name: 'yomua'}
+log.dir({ name: 'yomua' })
+```
+
+# chalk?
+
+你知道的, 较新版本的 [chalk](https://www.npmjs.com/package/chalk) (5.3.0) 目前是不支持 CommonJS 的, 所以如果对于有使用到 CommonJS 的项目来说, chalk 使用起来并不方便.
+
+@yomua/y-tlog 已将 chalk 内置, 并且可使用 `log.chalk` 逃生到 chalk, 同时也支持 CommonJS.
 
 # FAQ
 
@@ -178,3 +254,4 @@ log.requestConfig.onSuccess = (data) => {
   log.dir(data)
 }
 ```
+

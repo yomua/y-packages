@@ -17,6 +17,10 @@ const dye = {
     const message = messages.join('')
     return CHALK_COLOR_MAP['warning'](message)
   },
+  hex: CHALK_COLOR_MAP['hex'],
+  rgb: CHALK_COLOR_MAP['rgb'],
+  bgHex: CHALK_COLOR_MAP['bgHex'],
+  bgRgb: CHALK_COLOR_MAP['bgRgb'],
 }
 
 export default dye

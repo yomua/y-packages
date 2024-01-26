@@ -1,4 +1,4 @@
-import isEmptyObject from '../src/is-empty-object'
+import isEmptyObject from '../src/isEmptyObject'
 
 const s1 = Symbol('key')
 

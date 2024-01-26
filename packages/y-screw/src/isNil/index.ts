@@ -1,4 +1,4 @@
-import getType from './get-type'
+import getType from '../getType'
 
 // 类型谓词: value is null | undefined
 // => https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates

@@ -1,10 +1,33 @@
-import type { Options as MemoizeFnOptions } from './memoize-fn'
-import type { Task as LimitPromiseTask } from './limit-promise'
+import type { Options as MemoizeFnOptions } from './memoizeFn'
+import type { Task as LimitPromiseTask } from './limitPromise'
 
 export function addBigNumbers(initNumber?: string): {
   add(num: string): typeof addBigNumbers
   get(): string
 }
+
+export type JSValueType =
+  | 'string'
+  | 'number'
+  | 'boolean'
+  | 'null'
+  | 'undefined'
+  | 'bigInt'
+  | 'symbol'
+  | 'object'
+  | 'array'
+  | 'function'
+
+export type JSType =
+  | string
+  | number
+  | boolean
+  | undefined
+  | null
+  | bigint
+  | symbol
+  | object
+  | Function
 
 export function debounce<T = () => void>(
   fn: T,
@@ -69,3 +92,7 @@ export function urlChange(
     go?: boolean
   },
 ): void
+
+export function isType<T>(value: any, type: JSValueType): value is T
+
+export function transformToJSON(data: JSType | JSType[]): JSON

@@ -1,10 +1,31 @@
 import type { ChalkInstance } from 'chalk'
 import type HTTP from 'http'
 
+export type JSType =
+  | string
+  | number
+  | boolean
+  | undefined
+  | null
+  | bigint
+  | symbol
+  | object
+  | Function
+
+export type LogType =
+  | 'dir'
+  | 'error'
+  | 'group'
+  | 'table'
+  | 'log'
+  | 'warn'
+  | 'info'
+  | 'success'
+
 export type LogGroupSub =
   | {
-      message: unknown
-      type?: 'error' | 'info' | 'log' | 'trace' | 'dir' | 'table'
+      message: JSType
+      type?: LogType | 'trace'
     }
   | {
       message: {
@@ -46,6 +67,10 @@ type TLog = {
     error: (...messages: string[]) => string
     success: (...messages: string[]) => string
     warning: (...messages: string[]) => string
+    hex: (color: string) => ChalkInstance
+    rgb: (red: number, green: number, blue: number) => ChalkInstance
+    bgHex: (color: string) => ChalkInstance
+    bgRgb: (red: number, green: number, blue: number) => ChalkInstance
   }
 
   // 风格

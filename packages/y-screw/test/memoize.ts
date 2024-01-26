@@ -1,4 +1,4 @@
-import memoize from '../src/memoize-fn-value'
+import memoize from '../src/memoizeFnValue'
 
 let i = 0
 

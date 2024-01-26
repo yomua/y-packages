@@ -1,5 +1,5 @@
 // 在线例子: https://codesandbox.io/p/sandbox/memoizefn-8yth7j?file=%2Fsrc%2FApp.tsx
-import memoizeFn from '../src/memoize-fn'
+import memoizeFn from '../src/memoizeFn'
 
 let i = 0
 let j = 0

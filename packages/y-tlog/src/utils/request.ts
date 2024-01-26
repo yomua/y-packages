@@ -43,7 +43,7 @@ const request = (rUrl: string | null, config?: RequestConfig) => {
         let data: any[] = []
 
         // (流式)接收数据
-        // 服务端若支持流式传输, 则每次传输都会触发此事件, 所以使用数据接受数据
+        // 服务端若支持流式传输, 则每次传输都会触发此事件, 所以使用数组接受数据
         // 若不支持, 则会一次性获取所有数据
         // 轻服务端框架可参见: https://github.com/yomua/y-packages/tree/master/packages/y-server
         res.on('data', (chunk) => {
