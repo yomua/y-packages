@@ -28,6 +28,5 @@
   "devDependencies": {
     "@yomua/y-assert": "^0.0.3",
     "@yomua/y-tlog": "^0.1.4"
-  },
-  "dependencies": {}
+  }
 }

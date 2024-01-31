@@ -16,7 +16,6 @@
   "keywords": [],
   "author": "yomua",
   "license": "ISC",
-  "dependencies": {},
   "files": [
     "dist",
     "package.json",
