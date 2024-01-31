@@ -6,7 +6,10 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "github": "https://github.com/yomua/y-packages/tree/master/packages/y-eventemitter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yomua/y-packages/tree/master/packages/y-eventemitter"
+  },
   "scripts": {
     "build": "rollup -c"
   },

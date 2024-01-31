@@ -5,8 +5,10 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "github": "https://github.com/yomua/y-packages/tree/master/packages/y-enchant",
-  "scripts": {
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yomua/y-packages/tree/master/packages/y-enchant"
+  },  "scripts": {
     "build": "rollup -c"
   },
   "keywords": [],
