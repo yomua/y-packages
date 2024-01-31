@@ -1,6 +1,6 @@
 {
   "name": "@yomua/y-assert",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "简单的断言",
   "main": "./dist/cjs/index.js",
   "module": "./dist/index.js",
