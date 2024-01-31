@@ -4,4 +4,5 @@ dist/
 *.log
 lib/
 # 执行 yarn test 时, 会自动生成此文件
-src/test/index.mjs
+*/y-screw/test/index.mjs
+*/y-assert/test/index.mjs
