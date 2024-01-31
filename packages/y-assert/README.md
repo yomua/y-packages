@@ -13,5 +13,5 @@ const { expect } = assert
 
 expect('yomua').equal('yomua') // true
 
-expect('yomua').equal('yyy') // throw error
+expect('yomua').equal('yyy') // throw AssertError
 ```

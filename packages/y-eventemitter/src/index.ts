@@ -13,7 +13,7 @@ class SingletonEventemitter {
     this.events = {}
 
     // 防止意外地 new
-    // 理论上来说, 我们并没有暴露 SingletonEventemitter, 而是暴露 SingletonEventemitter.singleInstance
+    // 虽然理论上来说, 我们并没有暴露 SingletonEventemitter, 而是暴露 SingletonEventemitter.singleInstance
     if (!SingletonEventemitter.instance) {
       SingletonEventemitter.instance = this
     }

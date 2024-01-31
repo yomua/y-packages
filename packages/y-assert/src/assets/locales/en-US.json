@@ -1,0 +1,10 @@
+{
+  "expect.equal.unknown.error": "Unknown error",
+  "expect.equal.value.error": "Value mismatch",
+  "expect.equal.type.error": "Type mismatch",
+  "expect.equal.array.length.error": "Array length mismatch",
+  "expect.equal.array.item.error": "Array item mismatch",
+  "expect.equal.object.value.error": "Object value mismatch",
+  "expect.equal.object.key.error": "Object key mismatch",
+  "expect.equal.object.key.length.error": "Object key length mismatch"
+}

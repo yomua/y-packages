@@ -1,0 +1,10 @@
+{
+  "expect.equal.unknown.error": "未知错误",
+  "expect.equal.value.error": "值不匹配",
+  "expect.equal.type.error": "类型不匹配",
+  "expect.equal.array.length.error": "数组长度不匹配",
+  "expect.equal.array.item.error": "数组项不匹配",
+  "expect.equal.object.value.error": "对象值不匹配",
+  "expect.equal.object.key.error": "对象键不匹配",
+  "expect.equal.object.key.length.error": "对象键长度不匹配"
+}

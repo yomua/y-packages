@@ -8,8 +8,8 @@
   "github": "https://github.com/yomua/y-packages/tree/master/packages/y-screw",
   "scripts": {
     "build": "rollup -c",
-    "test:before": "node ../../scripts/copyFile.mjs dist/index.js test",
-    "test:start": "node ../../scripts/execTest.mjs src"
+    "test:before": "node ../../scripts/copyFile.mjs --sourceFilePath=dist/index.js --targetFolderPath=test",
+    "test": "yarn build && yarn test:before && node ../../scripts/execTest.mjs --filePath=src"
   },
   "keywords": [],
   "author": "yomua",
@@ -19,9 +19,6 @@
     "package.json",
     "README.md"
   ],
-  "_moduleAliases": {
-    "@": "./test"
-  },
   "imports": {
     "#test/*": "./test/*"
   },

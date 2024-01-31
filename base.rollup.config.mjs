@@ -12,7 +12,7 @@ const DEFAULT_PLUGINS = [
   terser(), // 编译后压缩代码, tree shaking 之类的.
   typescript({
     // 编译 typescript
-    compilerOptions: { lib: ['es5', 'es6', 'dom'], target: 'es5' },
+    compilerOptions: { lib: ['es5', 'es6', 'dom'], target: 'es6' },
     sourceMap: false,
   }),
   // nodeResolve(), // 如果一个包, 你需要内置到你写的包中(直接将源码写入项目), 则需要此插件解析;

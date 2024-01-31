@@ -1,6 +1,6 @@
 {
   "name": "@yomua/y-assert",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "简单的断言",
   "main": "./dist/cjs/index.js",
   "module": "./dist/index.js",
@@ -10,6 +10,8 @@
     "url": "https://github.com/yomua/y-packages/tree/master/packages/y-assert"
   },
   "scripts": {
+    "test:before": "yarn build && node ../../scripts/copyFile.mjs --sourceFilePath=dist/index.js --targetFolderPath=test",
+    "test": "yarn test:before && node ../../scripts/execTest.mjs --filePath=src",
     "build": "rollup -c"
   },
   "keywords": [],
@@ -21,5 +23,11 @@
     "README.md"
   ],
   "devDependencies": {},
-  "dependencies": {}
+  "imports": {
+    "#test/*": "./test/*"
+  },
+  "dependencies": {
+    "@yomua/y-screw": "^0.0.8",
+    "@yomua/y-tlog": "^0.1.4"
+  }
 }

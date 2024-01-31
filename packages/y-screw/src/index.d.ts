@@ -95,4 +95,4 @@ export function urlChange(
 
 export function isType<T>(value: any, type: JSValueType): value is T
 
-export function transformToJSON(data: JSType | JSType[]): JSON
+export function toJSON(data: JSType | JSType[]): JSON
