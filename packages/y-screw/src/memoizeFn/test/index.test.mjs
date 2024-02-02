@@ -20,7 +20,7 @@ function increasing2() {
 const memo1 = memoizeFn(increasing1, { resolver: '123' })
 const memo2 = memoizeFn(increasing1, { resolver: '456' })
 
-// 只对函数进行缓存, 不会对值进行缓存; 若想要对值进行缓存, Refer: memoize
+// 只对函数进行缓存, 不会对值进行缓存; 若想要对值进行缓存, Refer: memoizeFnValue
 expect(memo1(1, 2, 3)).equal(1)
 expect(memo1(1, 2, 3)).equal(2)
 
@@ -36,5 +36,6 @@ const memo3 = memoizeFn(increasing2, { resolver: '123' })
 const memo4 = memoizeFn(increasing2, { resolver: '456' })
 
 // memo3, memo4 是 increasing1, 不是 increasing2
+// 所以不是使用 j 进行计算
 expect(memo3()).equal(3)
 expect(memo4()).equal(4)

@@ -1,4 +1,4 @@
-export { default as isNil } from './isEmptyObject/test/isNil'
+export { default as isNil } from './isNil'
 export { default as isType } from './isType'
 export { default as getType } from './getType'
 export { default as throttle } from './throttle'
