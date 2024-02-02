@@ -14,7 +14,8 @@ const appendSuffix2 = '.js'
 
 void (async function () {
   try {
-    const p = path.resolve(__dirname, 'packages', libPath)
+    const p = path.resolve(__dirname, '../packages', libPath)
+    console.log('🚀 ~ p:', p)
     const paths = await fsPromises.readdir(p)
     // console.log(paths)
     const stack = [...paths]
