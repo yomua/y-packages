@@ -1,6 +1,6 @@
 {
   "name": "@yomua/y-screw",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "description": "为 JavaScript 提供额外的功能",
   "main": "./dist/cjs/index.js",
   "module": "./dist/index.js",
