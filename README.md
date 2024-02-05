@@ -16,7 +16,9 @@ y-packages 并不是一个标准的 monorepo 管理库。
 
   `npm run build`
 
-既可安装所以依赖, 且构建所有包
+既可安装所以依赖, 且构建所有包;
+
+必须: node >= 18.0.0, 因为 rollup 需要依赖 >= 18.0.0 的 node
 
 # Test
 

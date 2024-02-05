@@ -119,7 +119,7 @@ async function handleFile(filePath) {
 async function start() {
   try {
     const readDir = path.resolve(__dirname, '../packages', libPath)
-    // log.success('当前解析文件路径: ', readDir)
+    log.success('当前解析文件路径: ', readDir)
     // 得到 readDir 下所有目录路径和文件路径, 以 readDir 作为根路径, 得到的数据中不会包含它.
     // => 如: readDir 下存在: index.js(文件), useURL(文件夹), useLockEffect(文件夹)
     // => 则会返回: ['index.js', 'useURL', 'useLockEffect']

@@ -17,7 +17,7 @@ const {
   fileSuffix = 'mjs',
 } = getArgv(process.argv)
 
-const targetFilePath = path.join(targetFolderPath, fileName)
+const targetFilePath = path.join(targetFolderPath, `${fileName}.${fileSuffix}`)
 
 const renameFileName = path.join(targetFolderPath, `${fileName}.${fileSuffix}`)
 
@@ -25,16 +25,20 @@ const { dye } = log
 
 log(dye.success('复制文件'), sourceFilePath, '到', targetFilePath)
 
+if (!fs.existsSync(targetFolderPath)) {
+  fs.mkdirSync(targetFolderPath)
+}
+
 // 复制文件
 fs.copyFile(sourceFilePath, targetFilePath, (err) => {
   if (err) {
-    log.error('Copy Error:', err)
+    log.error('复制失败:', err)
     return
   }
 
   fs.rename(targetFilePath, renameFileName, (renameErr) => {
     if (renameErr) {
-      log.error('Rename error:', renameErr)
+      log.error('重命名失败:', renameErr)
 
       return
     }

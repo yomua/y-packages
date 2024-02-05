@@ -3,8 +3,11 @@ import log from '@yomua/y-tlog'
 
 import { deleteFolder } from '../utils/index.mjs'
 
-// 由于 packages 下的很多包都先依赖 y-screw, 所以先对它进行 build
-const buildBeforeCmd = ['yarn b:screw']
+/**
+ * y-screw: packages 下的很多包都要依赖 y-screw 才能 build, 所以先对它进行 build
+ * y-tlog: 有些包依赖 tlog, 但是再 yarn build 时比 tlog 先进行 build, 所以在此处先对 tlog 进行 build
+ */
+const buildBeforeCmd = ['yarn b:screw', 'yarn b:tlog']
 const buildBeforeDeleteFolder = ['y-screw/dist']
 
 // 匹配错误文本
