@@ -1,6 +1,6 @@
 import { exec } from 'child_process'
-import log from '@yomua/y-tlog'
 
+import log from '../utils/log.mjs'
 import { deleteFolder } from '../utils/index.mjs'
 
 /**
