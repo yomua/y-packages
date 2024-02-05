@@ -11,7 +11,8 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "publish": "npm publish --access=public"
+    "publish": "npm publish --access=public",
+    "test": "node ../../scripts/execTest.mjs --notTest=true"
   },
   "keywords": [],
   "author": "yomua",
@@ -22,6 +23,6 @@
     "README.md"
   ],
   "dependencies": {
-    "@yomua/y-screw": "^0.0.8"
+    "@yomua/y-screw": "^0.1.1"
   }
 }

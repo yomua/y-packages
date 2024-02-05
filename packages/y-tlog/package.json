@@ -10,7 +10,8 @@
     "url": "https://github.com/yomua/y-packages/tree/master/packages/y-tlog"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "test": "node ../../scripts/execTest.mjs --notTest=true"
   },
   "keywords": [],
   "author": "yomua",
@@ -21,7 +22,6 @@
     "README.md"
   ],
   "devDependencies": {
-    "@yomua/y-screw": "^0.0.8",
     "chalk": "^5.3.0"
   }
 }

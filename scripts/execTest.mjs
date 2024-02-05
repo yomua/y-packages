@@ -9,6 +9,7 @@ import { exec } from 'child_process'
 import log from '@yomua/y-tlog'
 
 import { getArgv } from '../utils/index.mjs'
+import { exit } from 'process'
 
 const { dye } = log
 
@@ -16,8 +17,19 @@ const { dye } = log
  * @filePath 测试文件所在目录
  * @breakException 当执行某个测试文件时, 若发生异常, 是否中断后续所有测试
  */
-const { filePath, breakException = false } = getArgv(process.argv)
+const {
+  notTest,
+  filePath,
+  notTestMsg = '暂时没有测试用例',
+  breakException = false,
+} = getArgv(process.argv)
 
+if (notTest) {
+  log.warn(notTestMsg)
+  exit(0) // 退出当前脚本执行
+}
+
+// 需要执行测试的文件的后缀名
 const FILE_SUFFIX_REGEXP = /^.*\.test\.(mjs|cjs|js)$/
 
 function findTestFiles(directory, files = []) {
@@ -40,8 +52,10 @@ function findTestFiles(directory, files = []) {
   return files
 }
 
+// 所有需要被测试的文件
 const testFiles = findTestFiles(filePath)
 
+// 使用 node 执行每一个测试文件
 testFiles.forEach((testFile) => {
   log(dye.success(`执行路径: ${testFile}`))
 

@@ -1,21 +1,17 @@
-import log from '@yomua/y-tlog'
-
 // 当前环境是否支持 Error.captureStackTrace
 const canElideFrames = 'captureStackTrace' in Error
 
-const { dye } = log
-
 class AssertError extends Error {
   get name() {
-    return dye.error('AssertError')
+    return '\x1b[31mAssertError\x1b[0m' // 红色字体
   }
 
   constructor(
-    message = 'Unspecified AssertError',
+    message?: string | null,
     extraInstanceProps = {},
     captureStackTraceFn: Function = AssertError,
   ) {
-    super(message)
+    super(message ?? 'Unspecified AssertError')
 
     if (canElideFrames) {
       /**

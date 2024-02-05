@@ -1,18 +1,17 @@
-import log from '@yomua/y-tlog'
-
 import zhCN from '../assets/locales/zh-CN.json'
 
 import { getLocales } from './index'
 import AssertError from '../class/AssertError'
 
-const { dye } = log
-
-export function getErrorMessage(key: keyof typeof zhCN, extraMessage: string = '') {
+export function getErrorMessage(
+  key: keyof typeof zhCN,
+  extraMessage: string = '',
+) {
   const locales: typeof zhCN = getLocales()
 
-  return dye.bgRgb(255, 0, 0)(locales[key] + extraMessage)
+  return `\x1b[41m${locales[key] + extraMessage}\x1b[0m` // 红色背景
 }
 
-export function throwError(message: string) {
+export function throwError(message: string | null) {
   throw new AssertError(message)
 }

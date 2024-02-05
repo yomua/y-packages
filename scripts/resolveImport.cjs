@@ -1,102 +1,161 @@
 // 此文件用来解析 lib 中的 import 语句
 // import useURL from './useURL' => import useURL from './useURL/index.js'
 // import test from './test => import test from './test.js'
+// => 1. 会尝试对每一个导入语句拼接 '/index.js', 如果拼接后的路径非文件, 则继续下一个规则
+// => 2. 会尝试对每一个导入语句拼接 '.js', 如果拼接后的路径非文件, 则继续下一个规则
 // 注: lib 文件夹中的文件是经过 tsc 编译 ts 后所形成的 js 文件.
 
-const fsPromises = require('fs').promises
 const fs = require('fs')
 const path = require('path')
+const fsPromises = require('fs').promises
+const log = require('@yomua/y-tlog')
+const { isType } = require('@yomua/y-screw')
+
+const Chain = require('../utils/chain.cjs')
+
+const chain = new Chain()
 
 const [nodeExePath, currentFilePath, libPath] = process.argv
 
 const appendSuffix1 = '/index.js'
 const appendSuffix2 = '.js'
 
-void (async function () {
+// 匹配导入, 导出语句 - 相对路径
+// => 匹配: import a from '../a'
+// => 匹配: import a from './a'
+// => 不匹配: import a from '@/a'
+// => 不匹配: import a from 'a'
+const regexpNames =
+  /(?:export|import)(?:\s)*?(?:\{)??.*?(?:\})??(?:\s)*?from(?:\s)*?["']([.]{1,2}\/.+)["']/gm
+
+/**
+ *
+ * @param {string} filePath 文件路径
+ * @param {string} connectPath 如果传入目录路径, 则 ${connectPath}/目录下的文件名
+ * @returns {Promise<{message: string} | string[]>} 指示是否委托给下一个函数 或 返回拼接 ${connectPath}/目录下文件名 的字符串数组
+ */
+async function handleDir(filePath, connectPath) {
+  // log.success('目录处理: ', filePath)
+  // 得到文件或目录信息
+  const statInfo = await fsPromises.stat(filePath)
+
+  // 如果是目录: 取出所有子节点, 再压入栈 dirs 中
+  if (statInfo.isDirectory()) {
+    const dirs = await fsPromises.readdir(filePath)
+
+    const result = []
+
+    if (dirs) {
+      for (const dir of dirs) {
+        result.push(path.join(connectPath, dir))
+      }
+    }
+
+    return result
+  }
+
+  return { message: 'next' }
+}
+
+/**
+ *
+ * @param {string} filePath
+ * @returns {Promise<string>} 文件内容
+ */
+async function handleFile(filePath) {
+  // log.success('文件处理: ', filePath)
+
+  let fileContent = await fsPromises.readFile(filePath, {
+    encoding: 'utf8',
+  })
+
+  const matchAll = fileContent.matchAll(regexpNames)
+
+  let count = 0
+
+  for (const item of matchAll) {
+    // 已经有 .js 后缀
+    if (/.js$/.test(item[1])) {
+      continue
+    }
+    const replacedStr = item[0] // 被替换的字符串
+
+    let resultStr = ''
+
+    const index = item.index + count
+
+    let isFileConnectIndexJS = false
+    // 尝试对每一个需要拼接的导入语句认为是文件夹, 拼接 /index.js,
+    // 如果拼接后的路径是存在的, 则拼接 /index.js, 否则拼接 .js
+    try {
+      isFileConnectIndexJS = fs
+        .statSync(path.resolve(filePath, '../', item[1] + appendSuffix1))
+        .isFile()
+    } catch (error) {
+      isFileConnectIndexJS = false
+    }
+
+    if (isFileConnectIndexJS) {
+      resultStr = replacedStr.replace(item[1], `${item[1]}${appendSuffix1}`)
+    } else {
+      resultStr = replacedStr.replace(item[1], `${item[1]}${appendSuffix2}`) // 替换的字符串; 用来替换被替换的字符串
+    }
+    const past = fileContent.slice(0, index) // 之前的导入语句内容
+    const feature = fileContent.slice(
+      index + replacedStr.length,
+      fileContent.length,
+    )
+    fileContent = `${past}${resultStr}${feature}`
+    if (isFileConnectIndexJS) {
+      count = count + appendSuffix1.length
+    } else {
+      count = count + appendSuffix2.length
+    }
+  }
+
+  return fileContent
+}
+
+async function start() {
   try {
-    const p = path.resolve(__dirname, '../packages', libPath)
-    console.log('🚀 ~ p:', p)
-    const paths = await fsPromises.readdir(p)
-    // console.log(paths)
-    const stack = [...paths]
-    // console.log('__stack', stack)
+    const readDir = path.resolve(__dirname, '../packages', libPath)
+    // log.success('当前解析文件路径: ', readDir)
+    // 得到 readDir 下所有目录路径和文件路径, 以 readDir 作为根路径, 得到的数据中不会包含它.
+    // => 如: readDir 下存在: index.js(文件), useURL(文件夹), useLockEffect(文件夹)
+    // => 则会返回: ['index.js', 'useURL', 'useLockEffect']
+    const dirs = await fsPromises.readdir(readDir)
 
-    while (stack.length) {
-      const top = stack.pop()
-      const pat = path.resolve(p, top)
-      const stat = await fsPromises.stat(pat)
-      if (stat.isDirectory()) {
-        const temp = await fsPromises.readdir(pat)
-        if (temp) {
-          for (const i of temp) {
-            stack.push(path.join(top, i))
-          }
-        }
-      } else {
-        let personList = await fsPromises.readFile(pat, { encoding: 'utf8' })
+    // 以栈的形式进行 dfs
+    // => 每取到一个节点 A, 就会把当前节点的所有子节点全部取出来继续压入栈的最后,
+    // => 然后再从栈的最后取出节点 (如果 A 是目录, 那么这次取出的节点就是 A 的子节点)
+    while (dirs.length) {
+      // 如: index.js
+      const popPath = dirs.pop()
 
-        // 匹配导入, 导出语句 - 相对路径
-        // => 匹配: import a from '../a'
-        // => 匹配: import a from './a'
-        // => 不匹配: import a from '@/a'
-        // => 不匹配: import a from 'a'
-        const regexpNames =
-          /(?:export|import)(?:\s)*?(?:\{)??.*?(?:\})??(?:\s)*?from(?:\s)*?["']([.]{1,2}\/.+)["']/gm
+      // 此文件的绝对路径
+      // => ${readDir}/index.js
+      // => 如: D:\code\y-packages\packages\y-hooks\lib\index.js
+      const filePath = path.resolve(readDir, popPath)
 
-        const match = personList.matchAll(regexpNames)
-        let count = 0
-        for (const item of match) {
-          if (/.js$/.test(item[1])) {
-            continue
-          }
-          // console.log('------------------start----------------')
-          const rStr = item[0] // 被替换的字符串
-          // console.log('_item', item)
+      chain.setReceiver(handleDir, filePath, popPath)
+      chain.setReceiver(handleFile, filePath)
 
-          let replaceStr = ''
+      const [dirResult, fileResult] = await chain.passRequest()
 
-          const index = item.index + count
+      const isNext = dirResult?.message === 'next'
 
-          let isFile = false
-          // 尝试对每一个需要拼接的导入语句认为是文件夹, 拼接 /index.js,
-          // 如果存在 index.js, 则拼接 /index.js, 否则拼接 .js
-          try {
-            isFile = fs
-              .statSync(path.resolve(pat, '../', item[1] + appendSuffix1))
-              .isFile()
-          } catch (error) {
-            isFile = false
-          }
+      if (!isNext && isType(dirResult, 'array')) {
+        dirs.push(...dirResult)
+      }
 
-          if (isFile) {
-            replaceStr = rStr.replace(item[1], `${item[1]}${appendSuffix1}`)
-          } else {
-            replaceStr = rStr.replace(item[1], `${item[1]}${appendSuffix2}`) // 替换的字符串; 用来替换被替换的字符串
-          }
-          const past = personList.slice(0, index) // 之前的导入语句内容
-          const feature = personList.slice(
-            index + rStr.length,
-            personList.length,
-          )
-          personList = `${past}${replaceStr}${feature}`
-          if (isFile) {
-            count = count + appendSuffix1.length
-          } else {
-            count = count + appendSuffix2.length
-          }
-
-          // console.log('_past', past)
-          // console.log('__rStr', rStr)
-          // console.log('_replaceStr', replaceStr)
-          // console.log('_feature', feature)
-          // console.log('_personList', personList)
-          // console.log('-----------------end-----------------')
-        }
-
-        await fsPromises.writeFile(pat, personList, { encoding: 'utf8' })
+      if (isNext) {
+        await fsPromises.writeFile(filePath, fileResult, { encoding: 'utf8' })
       }
     }
   } catch (error) {
-    console.log(error)
+    log.error(`解析失败: ${path.resolve(__dirname, '../packages', libPath)}`)
+    log.error(error)
   }
-})()
+}
+
+start()

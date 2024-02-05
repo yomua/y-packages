@@ -27,7 +27,6 @@
     "#test/*": "./test/*"
   },
   "dependencies": {
-    "@yomua/y-screw": "^0.0.8",
-    "@yomua/y-tlog": "^0.1.4"
+    "@yomua/y-screw": "^0.1.1"
   }
 }

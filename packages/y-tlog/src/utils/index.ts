@@ -1,4 +1,4 @@
-import { isType } from '@yomua/y-screw'
+// import { isType } from '@yomua/y-screw'
 import { JSType } from '../index.d'
 
 export function getEnv() {
@@ -24,17 +24,17 @@ export function transformToStrForLog(
       .join(options?.separator ?? ' ')
   }
 
-  if (isType<object>(data, 'object')) {
-    const keys = Reflect.ownKeys(data)
+  // if (isType<object>(data, 'object')) {
+  //   const keys = Reflect.ownKeys(data)
 
-    keys.forEach((key, index) => {
-      const value = data[key]
+  //   keys.forEach((key, index) => {
+  //     const value = data[key]
 
-      if (typeof key === 'symbol') {
-        return
-      }
-    })
-  }
+  //     if (typeof key === 'symbol') {
+  //       return
+  //     }
+  //   })
+  // }
 
   if (typeof data === 'string') {
     return data

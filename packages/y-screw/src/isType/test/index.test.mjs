@@ -16,3 +16,4 @@ expect(isType(undefined, 'undefined')).equal(true)
 expect(isType(BigInt(1), 'bigInt')).equal(true)
 
 expect(isType(function () {}, 'function')).equal(true)
+expect(isType(async function () {}, 'asyncFunction')).equal(true)

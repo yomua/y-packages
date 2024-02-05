@@ -7,11 +7,12 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "yarn workspaces run build",
+    "test": "yarn workspaces run test",
+    "build": "node scripts/build.mjs && yarn workspaces run build",
     "b:screw": "yarn workspace @yomua/y-screw build",
     "b:tlog": "yarn workspace @yomua/y-tlog build",
     "b:server": "yarn workspace @yomua/y-server build",
-    "b:hooks": "yarn workspace @yomua/y-hooks build",
+    "b:hooks": "yarn b:screw && yarn workspace @yomua/y-hooks build",
     "b:db": "yarn workspace @yomua/y-indexeddb build",
     "b:assert": "yarn workspace @yomua/y-assert build",
     "p:screw": "yarn workspace @yomua/y-screw publish --access=public",
@@ -25,6 +26,7 @@
   "author": "yomua",
   "license": "ISC",
   "devDependencies": {
+    "@yomua/y-tlog": "0.1.6",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.5",

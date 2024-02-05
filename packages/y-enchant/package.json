@@ -8,8 +8,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/yomua/y-packages/tree/master/packages/y-enchant"
-  },  "scripts": {
-    "build": "rollup -c"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "test": "node ../../scripts/execTest.mjs --notTest=true"
   },
   "keywords": [],
   "author": "",

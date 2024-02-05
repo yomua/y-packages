@@ -10,7 +10,8 @@
     "url": "https://github.com/yomua/y-packages/tree/master/packages/y-indexeddb"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "test": "node ../../scripts/execTest.mjs --notTest=true"
   },
   "keywords": [],
   "author": "yomua",

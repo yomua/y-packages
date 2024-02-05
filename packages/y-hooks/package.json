@@ -13,7 +13,8 @@
   "scripts": {
     "build": "yarn build:tsc && yarn build:rollup",
     "build:tsc": "tsc && tsc-alias && node ../../scripts/resolveImport.cjs y-hooks/lib",
-    "build:rollup": "rollup -c"
+    "build:rollup": "rollup -c",
+    "test": "node ../../scripts/execTest.mjs --notTest=true"
   },
   "keywords": [],
   "peerDependencies": {
@@ -22,7 +23,7 @@
   "author": "yomua",
   "license": "ISC",
   "dependencies": {
-    "@yomua/y-screw": "^0.0.8"
+    "@yomua/y-screw": "^0.1.1"
   },
   "files": [
     "dist",
