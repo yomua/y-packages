@@ -33,18 +33,22 @@
 
 工作区是一种组织多包项目的方式，它通过帮助管理包之间的依赖关系、提供共享依赖和更好地组织项目结构来改善项目管理。
 
-# 如何在其他包中使用另一个包
+# [如何在其他包中使用另一个包](https://classic.yarnpkg.com/lang/en/docs/workspaces/#toc-how-to-use-it) 
 
 ```js
-// package @yomua/y-screw
-
-// pakcage @yomua/y-server
+// package @yomua/y-server 中使用 screw
 import server from '@yomua/y-screw'
 ```
 
 可以这样直接使用，并不需要安装依赖到 `@yomua/y-server` 中，会自动引用 `@yomua/y-screw` 包本地所在的位置。
 
-但是需要注意：你需要将 `@yomua/y-screw` 设置为 `@yomua/y-server` 的 dep 或 devDep.
+=> 但是需要注意：你需要将 `@yomua/y-screw` 设置为 `@yomua/y-server` 的 dep 或 devDep.
+
+=> 目的是, 能让人知道此项目依赖哪些包, 且打包的时候根据 dep 或 devDep 进行打包/不打包.
+
+为什么？ 因为 yarn 管理的 monorepo 会自动将你指定的目录 (在这里是 `packages/*`) 映射到根目录下的 node_modules.
+
+Ref: KNOW.md - `y-packages 中使用 packages/* 的项目`
 
 # 常用命令
 
@@ -77,9 +81,11 @@ import server from '@yomua/y-screw'
 
 ## 无法在一个包 a 中使用另一个包 b
 
-需要先发布一版正确的，带有类型的包 a 到 npm 仓库
+1. 在包 a 中直接安装包 b
 
-- 可能是要让 yarn monorepo 识别吧.
+2. 在项目根目录 (y-packages/) 使用 `yarn install`, 让 yarn 重新对 `packages/*` 下的包进行链接.
+
+Ref: KNOW.md - `y-packages 中使用 packages/* 的项目`
 
 ## 使用发布命令时却发布到 yarn 的仓库？
 
