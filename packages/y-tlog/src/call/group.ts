@@ -7,7 +7,7 @@ import { IS_BROWSER, IS_NODE } from '../utils/constants'
 import type { LogGroupSub } from '../index.d'
 
 // 为什么要独立出来?
-// 因为 warn 和 error 除了拥有打印日志的能力外，还有其他能力, 比如: write, request, 但是这里我们不需要这些能力.
+// 因为 log.warn 和 log.error 除了拥有打印日志的能力外，还有其他能力, 比如: write, request, 但是这里我们不需要这些能力.
 function warn(...data: any[]) {
   if (IS_BROWSER) {
     console.warn(...data)

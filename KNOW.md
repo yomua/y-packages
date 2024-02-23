@@ -74,7 +74,7 @@
 
 TIP: 如果你去到 `packages/*` 的某个项目, 对其他项目进行导入, 然后再选择那个包点进去, vscode 只会进入到那个包本身的被引用的文件中, 而不会进入 `y-packages/node_modules`
 
-TIP: 你可以在 y-packages 提前通过 `yarn add -D @yomua/y-* -W` 将包安装到 `y-packages/node_modules/@yomua` 中, 但这样就不符合使用 monorepo 的初心了 -> 实时使用其他包的最新代码. 
+TIP(不建议): 你可以在 y-packages 提前通过 `yarn add -D @yomua/y-* -W` 将包安装到 `y-packages/node_modules/@yomua` 中, 但这样就不符合使用 monorepo 的初心了 -> 实时使用其他包的最新代码. 
 
 
 # 包的互相使用
