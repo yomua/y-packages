@@ -110,3 +110,40 @@ node 的模块解析策略如果在当前项目 (@yomua/y-tlog) 中的 node_modu
 - 在根目录使用 `yarn install`, 让 yarn 重新对 `packages/*` 目录进行解析并做 Symbolic Link.
 
 Ref: <a href="#y-packages-中使用-packages-的项目">y-packages 中使用 `packages/*` 的项目</a>
+
+# 支持 cjs 和 esm
+
+由于每个库中并没有对代码做任何判断是 cjs 或 esm 处理, 所以需要依赖 package.json 的字段, 
+
+来告诉每个打包器 (如: webpack, vite, rollup), 和 Node.js, 
+
+当使用者使用 require 或 import 导入模块时, 应该从哪个文件夹加载模块.
+
+[exports](https://nodejs.cn/api/v20/packages.html#conditional-exports): 从 `Node.js v12.16.0 ` 开始, 支持此字段, 解决应当加载 cjs 还是 esm.
+
+main, module, 优先级则是比 exports 低, 适合支持低版本 `Node < v12.16.0`
+
+[type](https://nodejs.cn/api/v20/packages.html#type): 指定 `*.js` 被认为是哪种模块文件, 可取的值有: `commonjs`, `module`,
+
+现在 node 默认值为 `commonjs`, 但应当始终包含此字段, 以防未来 node 将默认值改为 `module`, 且包含此字段语义更清晰.
+
+- 注意: 包含此字段的前提是, 你没有自行对入口文件做 cjs 和 esm 判断, 来决定加载哪些文件.
+
+```json
+// package.json
+{
+  "type": "module", // 假定所有使用者通过 esm 加载模块
+  "main": "./dist/cjs/index.cjs", // 为使用 cjs 加载的方式提供 cjs 模块
+  "module": "./dist/index.js", // 为 esm 加载方式提供 esm 模块
+  "types": "./dist/index.d.ts", // 提供类型声明文件
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts", // 提供类型声明文件
+      "import": "./dist/index.js", // 提供 esm 模块
+      "require": "./dist/cjs/index.cjs" // 提供 cjs 模块
+    }
+  },
+}
+
+
+```

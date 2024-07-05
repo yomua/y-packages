@@ -29,8 +29,5 @@
     "dist",
     "package.json",
     "README.md"
-  ],
-  "devDependencies": {
-    "react": "^18.2.0"
-  }
+  ]
 }

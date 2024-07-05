@@ -361,6 +361,61 @@ expect(toJSON({ arr: [{ name: 'yomua' }] })).equal(
 )
 ```
 
+## conditionalChain
+
+类似三元表达式, 但对多条件判断时, 语义更清晰
+
+- 支持链式调用
+
+- 对每个 `cond(condition)` 和 `r(result)` 实行位置上的一对一匹配
+
+```js
+import assert from '@yomua/y-assert'
+import { conditionalChain } from '@yomua/y-screw'
+const { expect } = assert
+
+// 对字符串进行判断
+expect(conditionalChain().cond('a').cond('b').cond('c').get()).equal(undefined)
+expect(conditionalChain().cond('a').r('r1').get()).equal('r1')
+
+// 对布尔值进行判断
+expect(conditionalChain().cond(false).cond(true).r('r1').r('r2').get()).equal(
+  'r2',
+)
+
+// 对表达式进行判断
+expect(
+  conditionalChain()
+    .cond(1 === 0)
+    .r('r1')
+    .cond(1 === 1)
+    .r('r2')
+    .get(),
+).equal('r2')
+
+// 对函数表达式进行判断
+expect(
+  conditionalChain()
+    .cond(() => true)
+    .r('r1')
+    .cond(() => false)
+    .r('r2')
+    .get(),
+).equal('r1')
+
+// 使用默认值
+expect(
+  conditionalChain()
+    .default('default1')
+    .cond(false)
+    .default('default2')
+    .r('r1')
+    .get(),
+).equal('default2')
+
+expect(conditionalChain().cond(true).get()).equal(undefined)
+```
+
 # browser 环境
 
 ## urlChange
@@ -378,6 +433,8 @@ urlChange(window.location.origin + '/yomua', {
 ```
 
 ```js
+
+// 携带 state
 window.addEventListener('popstate', (event) => {
   console.log(event.state) // {name: 'yhw'}
 })

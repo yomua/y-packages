@@ -10,6 +10,7 @@ export default function (options) {
     dts = [],
     input = 'src/index.d.ts',
     outputFileName = 'index.d.ts',
+    external = [],
   } = options || {}
 
   return [
@@ -22,6 +23,7 @@ export default function (options) {
         },
       ],
       plugins: [...DEFAULT_PLUGINS, ...plugins],
+      external,
     },
     ...dts,
   ]

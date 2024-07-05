@@ -15,6 +15,7 @@
     "b:hooks": "yarn b:screw && yarn workspace @yomua/y-hooks build",
     "b:db": "yarn workspace @yomua/y-indexeddb build",
     "b:assert": "yarn workspace @yomua/y-assert build",
+    "p:simdux": "yarn workspace @yomua/y-simdux publish --access=public",
     "p:screw": "yarn workspace @yomua/y-screw publish --access=public",
     "p:tlog": "yarn workspace @yomua/y-tlog publish --access=public",
     "p:server": "yarn workspace @yomua/y-server publish --access=public",

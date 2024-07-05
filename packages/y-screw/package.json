@@ -2,7 +2,8 @@
   "name": "@yomua/y-screw",
   "version": "0.1.1",
   "description": "为 JavaScript 提供额外的功能",
-  "main": "./dist/cjs/index.js",
+  "type": "module",
+  "main": "./dist/cjs/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "repository": {
@@ -12,7 +13,8 @@
   "scripts": {
     "build": "rollup -c",
     "test:before": "node ../../scripts/copyFile.mjs --sourceFilePath=dist/index.js --targetFolderPath=test",
-    "test": "yarn build && yarn test:before && node ../../scripts/execTest.mjs --filePath=src"
+    "test": "yarn build && yarn test:before && node ../../scripts/execTest.mjs --filePath=src",
+    "tsx": "tsx watch"
   },
   "keywords": [],
   "author": "yomua",
@@ -22,10 +24,19 @@
     "package.json",
     "README.md"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/cjs/index.cjs"
+    }
+  },
   "imports": {
-    "#test/*": "./test/*"
+    "#test/*": "./test/*",
+    "#src/*": "./src/*"
   },
   "devDependencies": {
-    "@yomua/y-assert": "^0.0.3"
+    "@yomua/y-assert": "^0.0.3",
+    "tsx": "^4.7.2"
   }
 }

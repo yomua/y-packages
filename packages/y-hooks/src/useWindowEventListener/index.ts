@@ -3,12 +3,14 @@ import { debounce } from '@yomua/y-screw'
 
 export interface Options {
   delay?: number // 单位: 毫秒
-  isRefreshItself?: boolean
+  capture?: boolean // 是否为捕获
+  isRefreshItself?: boolean // true: 防止 React 重新渲染时, 防抖失效
   returnEffect?: () => void
 }
 
 const DEFAULT_OPTIONS: Options = {
   delay: 0,
+  capture: false,
   isRefreshItself: false,
   returnEffect: () => {},
 }
@@ -26,6 +28,7 @@ export default function useWindowEventListener<K extends keyof WindowEventMap>(
 
   const {
     delay = 0,
+    capture = false,
     isRefreshItself = false,
     returnEffect = () => {},
   } = options
@@ -35,10 +38,10 @@ export default function useWindowEventListener<K extends keyof WindowEventMap>(
       isRefreshItself,
     })
 
-    window.addEventListener(eventName, debounceCallback)
+    window.addEventListener(eventName, debounceCallback, capture)
 
     return () => {
-      window.removeEventListener(eventName, debounceCallback)
+      window.removeEventListener(eventName, debounceCallback, capture)
 
       returnEffect && returnEffect()
     }

@@ -15,7 +15,7 @@ export default function <Args, FnResult>(
   // NaN: 缓存永不过期; 因为任何一个数和 NaN 比较都是 false; 包括 NaN === NaN 为 false
   let expiresTime = isNil(maxAge) ? NaN : Date.now() + maxAge * 1000
 
-  const memoized = (...args: Args[]) => {
+  function memoized(this: any, ...args: Args[]) {
     const endTime = Date.now()
 
     const key = args[0]

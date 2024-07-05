@@ -18,7 +18,7 @@ export function getArgv(arr) {
 
 /**
  *
- * 此函数认为根目录为: process.cwd(), 即: 当前项目所在的绝对路径作为根目录
+ * 此函数认为项目根目录为: process.cwd(), 即: 当前项目所在的绝对路径作为根目录, 如: D:/code/y-packages
  * @param {string[]} folder 文件路径
  */
 export function deleteFolder(folder) {

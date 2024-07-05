@@ -9,3 +9,7 @@
 # 使用
 
 - `import yhooks from '@yomua/y-hooks'`
+
+or
+
+- `import {useURL} from '@yomua/y-hooks`

@@ -35,4 +35,5 @@ export default extendedConfig({
   controlConfig: {
     cjs: true,
   },
+  defaultDtsExternal: ['chalk', 'http'],
 })

@@ -25,6 +25,7 @@ export default function (options) {
     plugins = [],
     external = [],
     dts = [],
+    defaultDtsExternal = [],
     controlConfig = { cjs: false },
   } = options || {}
 
@@ -32,7 +33,7 @@ export default function (options) {
 
   const {
     es: { file: esFile = 'dist/index.js', ...esRest },
-    cjs: { file: cjsFile = 'dist/cjs/index.js', ...cjsRest },
+    cjs: { file: cjsFile = 'dist/cjs/index.cjs', ...cjsRest },
   } = output ?? {
     es: {},
     cjs: {},
@@ -61,6 +62,6 @@ export default function (options) {
       external,
     },
 
-    ...defineDts({ dts }),
+    ...defineDts({ dts, external: defaultDtsExternal }),
   ].filter(Boolean)
 }

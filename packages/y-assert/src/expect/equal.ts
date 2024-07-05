@@ -72,6 +72,7 @@ export default function equal(target: any) {
 
   // 对象比较
   if (isType<object>(value, 'object') && isType<object>(target, 'object')) {
+    // ownKeys: 可以得到 Symbol 类型的键
     const valueKeys = Reflect.ownKeys(value)
     const targetKeys = Reflect.ownKeys(target)
 

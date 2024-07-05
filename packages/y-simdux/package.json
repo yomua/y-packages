@@ -1,0 +1,36 @@
+{
+  "name": "@yomua/y-simdux",
+  "version": "0.0.3",
+  "description": "简单的状态管理库",
+  "type": "module",
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yomua/y-packages/tree/master/packages/y-simdux"
+  },
+  "scripts": {
+    "build": "yarn build:tsc && yarn copy:types && yarn build:rollup",
+    "build:tsc": "tsc && node ../../scripts/resolveImport.cjs y-simdux/lib ",
+    "build:rollup": "rollup -c",
+    "publish": "yarn build && npm publish --access=public",
+    "copy:types": "node ../../scripts/copyFile.mjs --sourceFilePath=src/types.d.ts --targetFolderPath=lib --fileName=types --fileSuffix=d.ts",
+    "test": "node ../../scripts/execTest.mjs --notTest=true"
+  },
+  "keywords": [],
+  "author": "yomua",
+  "license": "ISC",
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/cjs/index.cjs"
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { JSValueType } from '../index.d'
+import { JSValueType } from '../../index.d'
 
 export default function getType<T>(data: T): JSValueType {
   const type = Object.prototype.toString

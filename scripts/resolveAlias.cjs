@@ -1,5 +1,6 @@
-// 这个不太好改成 mjs, 因为需要导入 json 文件
-// node import 是不支持导入 json 的, 需要额外自己解析, 也可以通过库 (rollup 等)
+// 这个不太好改成 .mjs, 因为需要使用此文件的项目, 可能要导入 json 文件
+// 而 node 环境中的 import 是不支持导入 json 的, 需要额外自己解析, 也可以通过库 (rollup 等)
+// 目前没有项目使用到此文件
 
 'use strict'
 

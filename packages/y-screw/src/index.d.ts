@@ -1,5 +1,5 @@
-import type { Options as MemoizeFnOptions } from './memoizeFn'
-import type { Task as LimitPromiseTask } from './limitPromise'
+import type { Options as MemoizeFnOptions } from './allEnv/memoizeFn'
+import type { Task as LimitPromiseTask } from './allEnv/limitPromise'
 
 export function addBigNumbers(initNumber?: string): {
   add(num: string): typeof addBigNumbers

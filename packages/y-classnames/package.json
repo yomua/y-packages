@@ -2,6 +2,7 @@
   "name": "@yomua/y-classnames",
   "version": "0.0.2",
   "description": "处理 class",
+  "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

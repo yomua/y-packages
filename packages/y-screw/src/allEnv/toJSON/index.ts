@@ -1,5 +1,6 @@
+import { JSType } from '../../index.d'
+
 import isType from '../isType'
-import { JSType } from '../index.d'
 
 function isPrimitive(
   value: any,

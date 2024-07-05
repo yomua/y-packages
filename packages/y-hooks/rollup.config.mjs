@@ -1,30 +1,11 @@
-import del from 'rollup-plugin-delete'
-import { dts } from 'rollup-plugin-dts'
+import extendedConfig from '../../base.rollup.config.lib.mjs'
 
-const input = 'lib/index.js'
-
-const output = {
-  dir: 'dist',
-  format: 'es',
-  preserveModules: true, // 保留模块结构
-  preserveModulesRoot: 'src',
-}
-export default [
-  {
-    input,
-    output,
-    plugins: [
-      del({
-        targets: ['dist/*', 'tsconfig.tsbuildinfo'],
-        verbose: true,
-        hook: 'buildEnd',
-      }),
-    ],
-    external: ['react', '@yomua/y-screw'],
+export default extendedConfig({
+  esmOutput: {
+    dir: 'dist',
+    format: 'es',
+    preserveModules: true, // 保留模块结构
+    preserveModulesRoot: 'src',
   },
-  {
-    input,
-    output,
-    plugins: [dts()],
-  },
-]
+  externalL: ['react', '@yomua/y-screw'],
+})

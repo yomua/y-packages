@@ -1,7 +1,7 @@
 import * as http from 'http'
+import { isEmptyObject } from '@yomua/y-screw'
 
 import store from '../store.js'
-import { isEmptyObject } from '@yomua/y-screw'
 
 export default function (port: number, onStart: (port: number) => void) {
   const server = http.createServer((req, res) => {

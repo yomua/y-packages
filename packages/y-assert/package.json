@@ -2,7 +2,8 @@
   "name": "@yomua/y-assert",
   "version": "0.0.3",
   "description": "简单的断言",
-  "main": "./dist/cjs/index.js",
+  "type": "module",
+  "main": "./dist/cjs/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "repository": {
@@ -23,6 +24,13 @@
     "README.md"
   ],
   "devDependencies": {},
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/cjs/index.cjs"
+    }
+  },
   "imports": {
     "#test/*": "./test/*"
   },

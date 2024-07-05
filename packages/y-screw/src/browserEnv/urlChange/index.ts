@@ -1,3 +1,5 @@
+import getMsg from '../../utils/getMsg'
+
 // 更新页面 URL 地址, 并在需要时触发 'popstate' 事件。
 export default function (
   url: string,
@@ -7,6 +9,11 @@ export default function (
   },
 ) {
   const { go = false, state = null } = options ?? {}
+
+  if (typeof window === 'undefined') {
+    getMsg('screw.urlChange.env.error')
+    // throw new Error(getMsg('screw.urlChange.env.error'))
+  }
 
   window.history.replaceState(null, '', url)
 
