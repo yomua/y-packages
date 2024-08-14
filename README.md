@@ -8,7 +8,7 @@ y-packages 并不是一个标准的 monorepo 管理库。
 
 # 快速开始
 
-- `yarn -W` 
+- `yarn -W`
 
   `npm i -W`
 
@@ -25,3 +25,15 @@ y-packages 并不是一个标准的 monorepo 管理库。
 - `yarn test`
 
 TIP: 只有当先完成 <a href='#快速开始'>快速开始</a>, 才能执行测试.
+
+# CDN
+
+所有库的 CDN 都可以通过 [unpkg](https://www.unpkg.com/) 加载.
+
+例如 @yomua/y-screw
+
+- https://www.unpkg.com/@yomua/y-screw@0.1.1/dist/index.js
+
+  https://www.unpkg.com/@yomua/y-screw@0.1.1/dist/cjs/index.js
+
+  你可以直接输入: https://www.unpkg.com/@yomua/y-screw, 这会自动得到对应的网址
