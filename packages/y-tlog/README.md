@@ -195,17 +195,18 @@ log.requestConfig.options = {
 log.requestConfig.onError = (error) => {}
 
 // 可选: 成功回调  - 默认 () => null
-// 可以通过 onReceiver 返回的数据来决定 data
+// 如果是 node 环境, 且是流式传输响应数据: 则可以通过 onReceiver 返回的数据来决定 data
 log.requestConfig.onSuccess = (data) => {
   // 回调函数中不允许再次调用 log, 否则会造成无限循环 -> 因为每次 log 都会发送请求, 同时再触发 onSuccess;
-  // 如果一定要怎么做, 可以添加:
-  // => log.requestConfig.isRequest = false
+  // 如果一定要怎么做, 可以添加以下行:
+  // log.requestConfig.isRequest = false
   // => 设置成不允许请求, 就不会继续发送请求
   console.dir(data)
 }
 
-// 可选: 数据传输时回调 - 针对 node  - 默认 () => null
+// 可选: 数据传输时回调 - 只在 node 环境生效  - 默认 () => null
 // 当服务端实现流式传输, 则此回调也将在每传输一次数据时就调用
+// 返回的内容将存入一个数组, 最后发送给 onSuccess 的参数 data
 log.requestConfig.onReceiver = (chunk) => {
   return '_onReceiver' + chunk
 }
@@ -216,7 +217,13 @@ log.group('title', [{ message: 'yomua' }])
 log.dir([{ name: 'yomua' }])
 ```
 
-对于发送请求操作, 携带的数据为原始数据, 即: log 时使用什么数据, 就发送什么类型数据.
+对于发送请求操作, 携带的数据为由 log 时决定, 即: log 时使用什么数据, 就发送什么数据.
+
+不同环境下发送数据的类型格式不同:
+
+- 在浏览器环境, 数据通过 body 发送, 类型由 log 决定: log() 什么类型, 就发送什么类型
+
+- 在 node 环境, 携带的数据为 JSON 字符串, 不是字符串的将通过 JSON.stringify() 转换
 
 特殊情况: 当传入多个参数给 log 时, 会将这些参数组装成一个数组发送.
 
@@ -254,4 +261,3 @@ log.requestConfig.onSuccess = (data) => {
   log.dir(data)
 }
 ```
-
