@@ -45,3 +45,14 @@ expect(
     .r('r1')
     .get(),
 ).equal('default2')
+
+// 条件全为 true, 则返回第一个 true 对应的值
+expect(
+  conditionalChain()
+    .cond(true)
+    .r('r1')
+    .cond(true)
+    .r('r2')
+    .get(),
+).equal('r1')
+

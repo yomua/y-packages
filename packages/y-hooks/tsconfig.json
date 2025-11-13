@@ -6,5 +6,9 @@
     "composite": true,
     "declaration": true
   },
+  "tsc-alias": {
+    "verbose": false,
+    "resolveFullPaths": true
+  },
   "include": ["src"]
 }

@@ -8,13 +8,21 @@
     "downlevelIteration": true,
     "resolveJsonModule": true, // 允许 ts 认识 JSON 文件
     "sourceMap": true,
-    "baseUrl": "./",
-    "paths": {
-      "@/*": ["packages/*"]
-    },
+    /**
+     * 如果在单独的 packages/xx 项目下, 继承了此配置, 且使用 tsc-alias 解析别名
+     * 那么 xx - tsconfig.json 的 baseUrl 必须和此配置的 baseUrl 指向路径一致
+     * 否则 tsc-alias 将解析别名失败.
+     * 路径指向一致:  即, 最终计算出来的目标路径要是一样的, 比如此处是 "./", 指向 "y-packages/*"
+     * => 那么 xx - tsconfig.json 的 baseUrl 要是 "../../", 也要指向 "y-packages/*"
+     * 所以, 建议此配置不进行 baseUrl 和 paths 配置, 由每个项目本身自行配置
+     */
+    // "baseUrl": "./",
+    // "paths": {
+    //   "@/*": ["packages/*"]
+    // },
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
-    "declaration": false,
+    "declaration": false, // 不生成声明文件
     "strictNullChecks": true,
     "importHelpers": true,
     "strict": true,

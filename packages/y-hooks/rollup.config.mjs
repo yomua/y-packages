@@ -7,5 +7,5 @@ export default extendedConfig({
     preserveModules: true, // 保留模块结构
     preserveModulesRoot: 'src',
   },
-  externalL: ['react', '@yomua/y-screw'],
+  external: ['react', '@yomua/y-screw'],
 })

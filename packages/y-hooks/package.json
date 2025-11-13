@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "yarn build:tsc && yarn build:rollup",
-    "build:tsc": "tsc && tsc-alias && node ../../scripts/resolveImport.cjs y-hooks/lib",
+    "build:tsc": "tsc && tsc-alias",
     "build:rollup": "rollup -c",
     "test": "node ../../scripts/execTest.mjs --notTest=true"
   },
