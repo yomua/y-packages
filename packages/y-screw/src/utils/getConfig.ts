@@ -1,4 +1,4 @@
-import fs from 'fs'
+import screwConfig from '../../screw.config.json'
 
 const PROJECT_ROOT = process.cwd() // 如: D:/code/y-packages/packages/y-screw
 
@@ -11,10 +11,10 @@ const DEFAULT_CONFIG = {
 }
 
 export default function getConfig(): Result {
-  const content = fs.readFileSync(PROJECT_ROOT + '/screw.config.json', 'utf-8')
-
-  const result = JSON.parse(content)
-
+  const result = screwConfig as {
+    locale: 'zh' | 'en'
+  }
+  
   return {
     ...DEFAULT_CONFIG,
     ...result,

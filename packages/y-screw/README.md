@@ -197,9 +197,11 @@ expect(memo1(1, 2, 3)).equal(2)
 // 即使 key 不一样, 但是由于 memo 的是同一个函数, memoizeFn 返回函数就是这同一个函数, 所以返回 true
 expect(memo1).equal(memo2)
 
-// 由于 cache 是声明在全局内存中, 所以调用 memoizeFn 时, cache 都指向同一个
-// 所以若有相同的 key, 则后面出现的一样的 key 将会被忽略
-// 所以 memoizeFn 返回的函数将指向 cache.get(resolver) => 这里就是 increasing1
+/**
+ * 由于 cache 是声明在全局内存中, 所以调用 memoizeFn 时, cache 都指向同一个
+ * 所以若有相同的 key, 则后面出现的一样的 key 将会被忽略
+ * 所以 memoizeFn 返回的函数将指向 cache.get(resolver) => 这里就是 increasing1
+ */
 const memo3 = memoizeFn(increasing2, { resolver: '123' })
 const memo4 = memoizeFn(increasing2, { resolver: '456' })
 
@@ -207,6 +209,35 @@ const memo4 = memoizeFn(increasing2, { resolver: '456' })
 // 所以不是使用 j 进行计算
 expect(memo3()).equal(3)
 expect(memo4()).equal(4)
+
+// 相同而 key, 只会记录第一个出现的 key
+expect(memo3).equal(memo1)
+expect(memo4).equal(memo2)
+```
+
+```js
+// 不指定 key, 自动使用 hashString 进行计算,
+// 这会使得缓存不同函数时, 后面出现的函数不会被忽略, 将会单独保存
+// 但是相同函数, 得到的 hash key 仍然是一样的
+let y = 0
+function increasing3() {
+  return ++y
+}
+const memo5 = memoizeFn(increasing3)
+const memo6 = memoizeFn(increasing3)
+expect(memo5()).equal(1)
+expect(memo6()).equal(2)
+
+let z = 0
+function increasing4() {
+  return ++z
+}
+// 这里和 memo5, memo6 一样没有使用 key, 但是新函数会被单独缓存
+// 因为 key 不同, 由  memoizeFn 自动计算
+const memo7 = memoizeFn(increasing4)
+const memo8 = memoizeFn(increasing4)
+expect(memo7()).equal(1)
+expect(memo8()).equal(2)
 ```
 
 ## memoizeFnValue
@@ -238,7 +269,8 @@ expect(increasing2()).equal(2)
 expect(increasing2()).equal(3)
 expect(increasing2()).equal(4)
 
-// 具有有效期, 且为 1s
+// 具有有效期, 且为 1s; 
+// 注意: 这是持续性的缓存, 即: 每 maxAge 秒后, 都会重新计算值, 并缓存 maxAge 秒, 直到过期, 如此反复
 ;(async function () {
   const increasing3 = memoizeFnValue(increasing, { maxAge: 1 })
   expect(increasing3()).equal(5) // 得到新值后, 缓存函数值
@@ -281,11 +313,15 @@ throttle(() => {
 
 和 JSON.stringify 类似, 但是特殊处理以下值:
 
-- 将 undefined 视为 null
+- 将 null 视为 null
 
-- 将 function 做 toString() 处理
+- 将 undefined  视为 null
 
-- 将 symbol 做 toString() 处理
+- 将 function, symbol, bigInt 做 toString() 处理
+
+- 在对象, 数组中, 含以上值, 也对其做以上处理.
+
+ 其他都和 JSON.stringify() 保持一致
 
 ### 示例
 
@@ -299,15 +335,16 @@ const { expect } = assert
 
 ```js
 // 原始值
-expect(toJSON(1)).equal(1)
-expect(toJSON(true)).equal(true)
+expect(toJSON(1)).equal('1')
+expect(toJSON(true)).equal('true')
 ```
 
 ```js
-// Symbol (Symbol 在此处也是原始值, 不过在这里将它独立书写, 以便阅读)
+// Symbol, BigInt (也是原始值, 不过在这里将它们独立书写, 以便阅读)
 expect(toJSON(symbol1)).equal('Symbol(1)')
 expect(toJSON({ [symbol1]: '1' })).equal('{"Symbol(1)":"1"}')
 expect(toJSON([{ [symbol1]: 1 }])).equal('[{"Symbol(1)":1}]')
+expect(toJSON(BigInt(1111111111111111))).equal('1111111111111111')
 ```
 
 ```js
@@ -358,6 +395,28 @@ expect(toJSON({ obj: { age: '18' } })).equal(
 expect(toJSON({ arr: ['yomua'] })).equal(JSON.stringify({ arr: ['yomua'] }))
 expect(toJSON({ arr: [{ name: 'yomua' }] })).equal(
   JSON.stringify({ arr: [{ name: 'yomua' }] }),
+)
+```
+
+```js
+// 各种值混合测试
+expect(
+  toJSON({
+    arr: [
+      1,
+      '2',
+      'true',
+      true,
+      null, // null
+      undefined, // null
+      NaN, // nul
+      symbol1, // 保留 symbol 值:  Symbol(1)
+      { name: 'yomua' },
+      [1, 2, 3, { name: 'yomua' }],
+    ],
+  }),
+).equal(
+  '{"arr":[1,"2","true",true,null,null,null,"Symbol(1)",{"name":"yomua"},[1,2,3,{"name":"yomua"}]]}',
 )
 ```
 
@@ -416,14 +475,32 @@ expect(
 expect(conditionalChain().cond(true).get()).equal(undefined)
 
 // 条件全为 true, 则返回第一个 true 对应的值
-expect(
-  conditionalChain()
-    .cond(true)
-    .r('r1')
-    .cond(true)
-    .r('r2')
-    .get(),
-).equal('r1')
+expect(conditionalChain().cond(true).r('r1').cond(true).r('r2').get()).equal(
+  'r1',
+)
+```
+
+## hashString
+
+```js
+import assert from '@yomua/y-assert'
+import { hashString } from '@yomua/y-screw'
+
+const { expect } = assert
+```
+
+```js
+;(async function () {
+  // 将一个字符串转为 hash 值
+  // 支持各种环境: node, browser(新版浏览器), browser(旧版浏览器)
+  const value = await hashString('yomua')
+
+  expect(value).equal(
+    'e80789d2f56d544c268e51bccb69ae9d0650f77b4646467fc9ea51c3874ebec6',
+  )
+
+  expect(value).typeOf('string')
+})
 ```
 
 # browser 环境
@@ -443,7 +520,6 @@ urlChange(window.location.origin + '/yomua', {
 ```
 
 ```js
-
 // 携带 state
 window.addEventListener('popstate', (event) => {
   console.log(event.state) // {name: 'yhw'}

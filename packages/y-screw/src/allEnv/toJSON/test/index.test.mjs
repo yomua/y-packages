@@ -7,13 +7,14 @@ const { expect } = assert
 const symbol1 = Symbol(1)
 
 // 原始值
-expect(toJSON(1)).equal(1)
-expect(toJSON(true)).equal(true)
+expect(toJSON(1)).equal('1')
+expect(toJSON(true)).equal('true')
 
-// Symbol (Symbol 在此处也是原始值, 不过在这里将它独立书写, 以便阅读)
+// Symbol, BigInt (也是原始值, 不过在这里将它们独立书写, 以便阅读)
 expect(toJSON(symbol1)).equal('Symbol(1)')
 expect(toJSON({ [symbol1]: '1' })).equal('{"Symbol(1)":"1"}')
 expect(toJSON([{ [symbol1]: 1 }])).equal('[{"Symbol(1)":1}]')
+expect(toJSON(BigInt(1111111111111111))).equal('1111111111111111')
 
 // undefined (所有 undefined, 最后都会被转为 null 显示)
 expect(toJSON(undefined)).equal(null)
@@ -54,4 +55,24 @@ expect(toJSON({ obj: { age: '18' } })).equal(
 expect(toJSON({ arr: ['yomua'] })).equal(JSON.stringify({ arr: ['yomua'] }))
 expect(toJSON({ arr: [{ name: 'yomua' }] })).equal(
   JSON.stringify({ arr: [{ name: 'yomua' }] }),
+)
+
+// 各种值混合测试
+expect(
+  toJSON({
+    arr: [
+      1,
+      '2',
+      'true',
+      true, 
+      null, // null
+      undefined, // null
+      NaN, // nul
+      symbol1, // 保留 symbol 值:  Symbol(1)
+      { name: 'yomua' },
+      [1, 2, 3, { name: 'yomua' }],
+    ],
+  }),
+).equal(
+  '{"arr":[1,"2","true",true,null,null,null,"Symbol(1)",{"name":"yomua"},[1,2,3,{"name":"yomua"}]]}',
 )

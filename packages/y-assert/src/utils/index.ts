@@ -5,8 +5,12 @@ import assert from '../index'
 
 export function isPrimitive(
   value: any,
-): value is string | number | boolean | undefined | symbol | Function {
-  return typeof value !== 'object' && value !== null
+): value is string | number | boolean | undefined | symbol {
+  if (typeof value === 'function' || typeof value === 'object') {
+    return false
+  }
+
+  return true
 }
 
 export function getLocales() {

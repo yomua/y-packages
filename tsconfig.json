@@ -6,8 +6,19 @@
     "jsx": "react", // 开启 jsx
     "esModuleInterop": true,
     "downlevelIteration": true,
-    "resolveJsonModule": true, // 允许 ts 认识 JSON 文件
+
+    /**
+     * 若使用 tsc 时, 没有把 *.json 文件复制到输出目录的情况:
+     * 1. 开启了 "noEmit": true
+     * 2. 开启了 "emitDeclarationOnly": true
+     * 3. 没有把 json 列入 include: => "include": ["src", "**\/*.json"] => 反斜杠 \ 是为了防止匹配到注释符号
+     * 4. 开启了 composite: true; tsc 只会输出 .ts 编译结果, 不会复制非 TS 文件（包括 JSON）
+     * 注意: 使用 rollup 打包时, 已经通过 @rollup/plugin-json 将 *.json 文件解析为对象, 并写入到打包后的文件中
+     */
+    "resolveJsonModule": true, // 允许 ts 识别 JSON 文件, 并在使用 tsc 时, 将其复制到输出目录
+
     "sourceMap": true,
+
     /**
      * 如果在单独的 packages/xx 项目下, 继承了此配置, 且使用 tsc-alias 解析别名
      * 那么 xx - tsconfig.json 的 baseUrl 必须和此配置的 baseUrl 指向路径一致
@@ -20,6 +31,7 @@
     // "paths": {
     //   "@/*": ["packages/*"]
     // },
+
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "declaration": false, // 不生成声明文件
@@ -31,8 +43,8 @@
   "exclude": [
     "node_modules",
     "lib",
-    "es",
     "dist",
+    "es",
     "typings",
     "**/__test__",
     "test",

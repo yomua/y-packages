@@ -1,11 +1,11 @@
 import { getType, isType } from '@yomua/y-screw'
 
-import flag from '../utils/flag'
-import AssertMessage from '../class/AssertMessage'
-import { throwError, getErrorMessage } from '../utils/error'
-import { getExpectInstance, isPrimitive } from '../utils/index'
+import flag from '../../utils/flag'
+import AssertMessage from '../../class/AssertMessage'
+import { throwError, getErrorMessage } from '../../utils/error'
+import { getExpectInstance, isPrimitive } from '../../utils/index'
 
-import { EXPECT_KEY } from './constants'
+import { EXPECT_KEY } from '../constants'
 
 const message = new AssertMessage()
 
@@ -13,6 +13,8 @@ export default function equal(target: any) {
   // 不更改 flag(instance, EXPECT_KEY) 的值的情况下, 得到实例
   const instance = getExpectInstance()
 
+  // 调用 except(value) 设置的初始值;
+  // 或递归 equal 重新设置的值
   const value = flag(instance, EXPECT_KEY)
 
   // 类型比较
@@ -86,7 +88,7 @@ export default function equal(target: any) {
       throwError(message.error)
     }
 
-    // 对对象每个 key 和 value 进行递归比较
+    // 对 对象每个 key 和 value 进行递归比较
     for (let i = 0; i < valueKeys.length; i++) {
       const valueKey = valueKeys[i]
 
@@ -123,6 +125,14 @@ export default function equal(target: any) {
     }
 
     return true
+  }
+
+  // 函数比较
+  if (
+    isType<Function>(value, 'function') &&
+    isType<Function>(target, 'function')
+  ) {
+    return Object.is(value, target)
   }
 
   // null 比较

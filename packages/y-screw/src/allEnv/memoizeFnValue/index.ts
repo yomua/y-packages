@@ -15,7 +15,7 @@ export default function <Args, FnResult>(
   // NaN: 缓存永不过期; 因为任何一个数和 NaN 比较都是 false; 包括 NaN === NaN 为 false
   let expiresTime = isNil(maxAge) ? NaN : Date.now() + maxAge * 1000
 
-  function memoized(this: any, ...args: Args[]) {
+  function memoized(...args: Args[]) {
     const endTime = Date.now()
 
     const key = args[0]
@@ -33,9 +33,15 @@ export default function <Args, FnResult>(
       return memoized.cache.get(key)
     }
 
+    /**
+     * 忽略 fn.apply(this, args) 的类型是因为:
+     * 这里使用 this 将会报错, 必须这么写 memoized(this, ...args),
+     * 但是这么写, 很明显会造成歧义, 且如果把这么写的函数写在 .html - script, 将无法运行
+     */
+    /** @ts-ignore */
     const result = fn.apply(this, args)
 
-    memoized.cache = memoized.cache.set(key, result)
+    memoized.cache.set(key, result)
 
     return result
   }

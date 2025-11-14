@@ -1,5 +1,13 @@
-import fs from 'fs'
+import zhCN from '../assets/locales/error/zh-CN.json'
+import enUS from '../assets/locales/error/en-US.json'
 
-function getFileContent(path) {
-  const content = fs.readFileSync(path, 'utf-8')
-}
+// export function getLocales() {
+//   switch (locales) {
+//     case 'zh-CN':
+//       return zhCN
+//     case 'en-US':
+//       return enUS
+//     default:
+//       return zhCN
+//   }
+// }

@@ -17,6 +17,7 @@ expect('').equal('')
 expect('yomua').equal('yomua')
 expect(true).equal(true)
 expect(symbol1).equal(symbol1)
+expect(BigInt(1)).equal(BigInt(1))
 
 // 函数
 expect(fn).equal(fn)

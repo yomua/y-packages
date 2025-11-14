@@ -3,6 +3,9 @@
 // 若未传入 value, 则直接返回 __flags[key]
 export default function (
   obj: Object & { __flags?: { [key: string]: any } },
+  // 不能将 key value 改成对象形式: {key, value }
+  // 因为这里要使用 arguments.length 来防止 value 为 null, undefined 这些故意被重新设置的值.
+  // 使第三个参数只要存在, 就会触发重新设置, 不论是 value, null, 0, '', false 等
   key: string | symbol | number,
   value?: any,
 ) {

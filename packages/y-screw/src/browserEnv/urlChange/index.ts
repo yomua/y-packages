@@ -1,3 +1,4 @@
+// 浏览器环境无法使用 fs, 如果暂时没有报错, 只不过你的打包器帮你 polyfill 了
 import getMsg from '../../utils/getMsg'
 
 // 更新页面 URL 地址, 并在需要时触发 'popstate' 事件。
@@ -10,16 +11,16 @@ export default function (
 ) {
   const { go = false, state = null } = options ?? {}
 
-  if (typeof window === 'undefined') {
-    getMsg('screw.urlChange.env.error')
-    // throw new Error(getMsg('screw.urlChange.env.error'))
-  }
+  try {
+    window.history.replaceState(null, '', url)
 
-  window.history.replaceState(null, '', url)
+    if (go) {
+      const popStateEvent = new PopStateEvent('popstate', { state })
 
-  if (go) {
-    const popStateEvent = new PopStateEvent('popstate', { state })
-
-    window.dispatchEvent(popStateEvent)
+      window.dispatchEvent(popStateEvent)
+    }
+  } catch (error) {
+    throw new Error(getMsg('screw.urlChange.env.error'))
+    // throw new Error('"[urlChange]: 此函数仅在浏览器环境中可用。')
   }
 }

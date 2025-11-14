@@ -1,10 +1,4 @@
-import * as crypto from 'crypto'
-
-function hashString(inputString: string) {
-  const hash = crypto.createHash('sha256')
-  hash.update(inputString)
-  return hash.digest('hex')
-}
+import hashString from '../hashString'
 
 export type Options = {
   // 一个持久化上下文, 即: cache, 存放要被缓存的函数
